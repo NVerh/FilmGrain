@@ -23,5 +23,10 @@ namespace FilmGrain.Repositories
             _contextAccessor.HttpContext.Session.SetString("Username", username);
             _contextAccessor.HttpContext.Session.SetInt32("Id", id);
         }
+        public void RemoveLoginSession()
+        {
+            _contextAccessor.HttpContext.Session.Remove("Username");
+            _contextAccessor.HttpContext.Session.Remove("Id");
+        }
     }
 }
