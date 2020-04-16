@@ -14,6 +14,12 @@ using DAL.Access;
 using Services;
 using FilmGrain.Mapping;
 using AutoMapper;
+using FilmGrain.Repositories;
+using FilmGrain.Logic;
+using DTO;
+using DAL.Interface;
+using DAL.Concrete;
+
 
 namespace FilmGrain
 {
@@ -41,6 +47,9 @@ namespace FilmGrain
             services.AddHttpContextAccessor();
             services.AddScoped<PasswordSalt>();
             services.AddScoped<PasswordHash>();
+            services.AddScoped<LoginRepository>();
+            services.AddScoped<IUserContext, UserContext>();
+            services.AddScoped<UserLogic>();
             services.AddAutoMapper(typeof(MappingBootstrapper));
             DBAccess._connectionstring = (Configuration.GetConnectionString("DefaultConnection"));            
         }

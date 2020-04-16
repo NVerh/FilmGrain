@@ -19,8 +19,9 @@ namespace DAL.Concrete
                 {
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@UserId", user.Id);
-                    cmd.Parameters.AddWithValue("@Username", user.Name);
+                    cmd.Parameters.AddWithValue("@Username", user.UserName);
                     cmd.Parameters.AddWithValue("@Email", user.Email);
+                    cmd.Parameters.AddWithValue("@IsAdministrator", user.IsAdmin);
                     cmd.Parameters.AddWithValue("@Password", user.Password);
                     conn.Open();
                     cmd.ExecuteNonQuery();
@@ -46,7 +47,7 @@ namespace DAL.Concrete
                         while(dataReader.Read())
                         {
                             user.Id = dataReader.GetInt32(0);
-                            user.Name = dataReader.GetString(1);
+                            user.UserName = dataReader.GetString(1);
                             user.Password = dataReader.GetString(2);
                             user.IsAdmin = dataReader.GetBoolean(3);
                             user.Email = dataReader.GetString(4);
