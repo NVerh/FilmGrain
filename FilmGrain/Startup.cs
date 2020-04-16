@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Identity;
 using FilmGrain.Models;
+using DAL.Access;
 
 namespace FilmGrain
 {
@@ -26,6 +27,9 @@ namespace FilmGrain
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddSession();
+            services.AddHttpContextAccessor();
+            DBAccess._connectionstring = (Configuration.GetConnectionString("DefaultConnection"));            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
