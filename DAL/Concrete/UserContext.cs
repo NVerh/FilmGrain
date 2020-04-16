@@ -29,5 +29,33 @@ namespace DAL.Concrete
 
             }
         }
+
+        public UserDTO GetAccountFromDB(string username, string password)
+        {
+            UserDTO user = new UserDTO();
+            using(SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
+            {
+                using(SqlCommand cmd = new SqlCommand("dbo.spUser_GetUser", conn))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Username", username);
+                    cmd.Parameters.AddWithValue("@Password", password);
+                    conn.Open();
+                    using(SqlDataReader dataReader = cmd.ExecuteReader())
+                    {
+                        while(dataReader.Read())
+                        {
+                            user.Id = dataReader.GetInt32(0);
+                            user.Name = dataReader.GetString(1);
+                            user.Password = dataReader.GetString(2);
+                            user.IsAdmin = dataReader.GetBoolean(3);
+                            user.Email = dataReader.GetString(4);
+                        }
+                    }
+                    conn.Close();
+                }
+            }
+            return user;
+        }
     }
 }

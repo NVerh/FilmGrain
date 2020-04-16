@@ -8,5 +8,6 @@ namespace DAL.Interface
     public interface IUserContext
     {
         void AddAccountToDB(UserDTO user);
+        UserDTO GetAccountFromDB(string username, string password); 
     }
 }

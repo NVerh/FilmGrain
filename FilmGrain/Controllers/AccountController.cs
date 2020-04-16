@@ -39,7 +39,7 @@ namespace FilmGrain.Controllers
         {
             if(ModelState.IsValid)
             {
-                _loginRepo.SetLoginSession(account.Username, accoun)
+                _loginRepo.SetLoginSession(account.Username, account.Id);
             }
             return View();
         }

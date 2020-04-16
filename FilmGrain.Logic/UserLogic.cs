@@ -16,9 +16,22 @@ namespace FilmGrain.Logic
         {
             _userContext.AddAccountToDB(user);
         }
-        public void CheckIfAccountAlreadyExists(UserDTO user)
-        {
 
-        }    
+        public UserDTO GetAccount(string username, string password)
+        {
+            return _userContext.GetAccountFromDB(username, password);
+        }
+        private bool CheckIfAccountAlreadyExists(UserDTO user)
+        {
+            return false;
+        }
+        private bool CheckIfAccountDataIsEmpty(UserDTO user)
+        {
+            if(user.Id <= 0)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }
