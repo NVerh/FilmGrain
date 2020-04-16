@@ -15,9 +15,13 @@ namespace DAL.Concrete
         {
             using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
             {
-                using(SqlCommand cmd = new SqlCommand("AddAccount",conn))
+                using(SqlCommand cmd = new SqlCommand("dbo.spUser_AddUser",conn))
                 {
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@UserId", user.Id);
+                    cmd.Parameters.AddWithValue("@Username", user.Name);
+                    cmd.Parameters.AddWithValue("@Email", user.Email);
+                    cmd.Parameters.AddWithValue("@Password", user.Password);
                     conn.Open();
                     cmd.ExecuteNonQuery();
                     conn.Dispose();

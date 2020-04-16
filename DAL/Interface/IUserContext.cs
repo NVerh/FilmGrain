@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DAL.Interface
 {
-    interface IUserContext
+    public interface IUserContext
     {
         void AddAccountToDB(UserDTO user);
     }

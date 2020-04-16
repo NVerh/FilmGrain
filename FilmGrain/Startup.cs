@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Identity;
 using FilmGrain.Models;
 using DAL.Access;
+using Services;
 
 namespace FilmGrain
 {
@@ -36,6 +37,8 @@ namespace FilmGrain
             }
             );
             services.AddHttpContextAccessor();
+            services.AddScoped<PasswordSalt>();
+            services.AddScoped<PasswordHash>();
             DBAccess._connectionstring = (Configuration.GetConnectionString("DefaultConnection"));            
         }
 
