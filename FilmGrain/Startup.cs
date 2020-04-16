@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Identity;
 using FilmGrain.Models;
 using DAL.Access;
 using Services;
+using FilmGrain.Mapping;
+using AutoMapper;
 
 namespace FilmGrain
 {
@@ -39,6 +41,7 @@ namespace FilmGrain
             services.AddHttpContextAccessor();
             services.AddScoped<PasswordSalt>();
             services.AddScoped<PasswordHash>();
+            services.AddAutoMapper(typeof(MappingBootstrapper));
             DBAccess._connectionstring = (Configuration.GetConnectionString("DefaultConnection"));            
         }
 

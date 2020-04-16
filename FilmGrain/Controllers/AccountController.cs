@@ -7,23 +7,23 @@ using FilmGrain.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 using FilmGrain.Logic;
+using AutoMapper;
+using DTO;
 
 namespace FilmGrain.Controllers
 {
     public class AccountController : Controller
     {
         private readonly LoginRepository _loginRepo;
-        private readonly PasswordHash _hash;
-        private readonly PasswordSalt _salt;
         private readonly UserLogic _userLogic;
+        private readonly IMapper _mapper;
         
 
-        public AccountController(LoginRepository loginRepo, PasswordHash hash, PasswordSalt salt, UserLogic userLogic )
+        public AccountController(LoginRepository loginRepo, UserLogic userLogic, IMapper mapper )
         {
             _loginRepo = loginRepo;
-            _hash = hash;
-            _salt = salt;
             _userLogic = userLogic;
+            _mapper = mapper;
         }
         public IActionResult Index()
         {
@@ -39,7 +39,9 @@ namespace FilmGrain.Controllers
         {
             if(ModelState.IsValid)
             {
-                _loginRepo.SetLoginSession(account.Username, account.Id);
+                var salt = PasswordSalt.Create();
+                account.Password = PasswordHash.Create(account.Password, salt);
+                _userLogic.CreateAccount(_mapper.Map<UserDTO>(account));
             }
             return View();
         }
