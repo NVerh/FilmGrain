@@ -14,6 +14,10 @@ namespace FilmGrain.Logic
         }
         public void CreateAccount(UserDTO user)
         {
+            if (CheckIfAccountAlreadyExists(user))
+            {
+
+            }
             _userContext.AddAccountToDB(user);
         }
 
@@ -32,6 +36,10 @@ namespace FilmGrain.Logic
                 return false;
             }
             return true;
+        }
+        private bool CheckIfAccountCredentialsAreCorrect(string username, string password)
+        {
+            return false;
         }
     }
 }

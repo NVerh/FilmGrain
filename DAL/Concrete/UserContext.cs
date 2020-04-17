@@ -6,6 +6,8 @@ using System.Data.SqlTypes;
 using System.Text;
 using System.Data.SqlClient;
 using DAL.Access;
+using System.Data.Common;
+using System.Linq.Expressions;
 
 namespace DAL.Concrete
 {
@@ -15,7 +17,7 @@ namespace DAL.Concrete
         {
             using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
             {
-                using(SqlCommand cmd = new SqlCommand("dbo.spUser_AddUser",conn))
+                using (SqlCommand cmd = new SqlCommand("dbo.spUser_AddUser", conn))
                 {
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@UserId", user.Id);
@@ -34,17 +36,17 @@ namespace DAL.Concrete
         public UserDTO GetAccountFromDB(string username, string password)
         {
             UserDTO user = new UserDTO();
-            using(SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
+            using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
             {
-                using(SqlCommand cmd = new SqlCommand("dbo.spUser_GetUser", conn))
+                using (SqlCommand cmd = new SqlCommand("dbo.spUser_GetUser", conn))
                 {
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@Username", username);
                     cmd.Parameters.AddWithValue("@Password", password);
                     conn.Open();
-                    using(SqlDataReader dataReader = cmd.ExecuteReader())
+                    using (SqlDataReader dataReader = cmd.ExecuteReader())
                     {
-                        while(dataReader.Read())
+                        while (dataReader.Read())
                         {
                             user.Id = dataReader.GetInt32(0);
                             user.UserName = dataReader.GetString(1);
@@ -58,5 +60,32 @@ namespace DAL.Concrete
             }
             return user;
         }
+        public string GetAccountName(string username)
+        {
+            string usernamefromdb = null;
+            using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
+            {
+                using (SqlCommand cmd = new SqlCommand("dbo.spUser_GetUsername", conn))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Username", username);
+                    conn.Open();
+                    using (SqlDataReader dataReader = cmd.ExecuteReader())
+                    {
+                        while (dataReader.Read())
+                        {
+
+                            if (!dataReader.IsDBNull(1))
+                            {
+                                usernamefromdb = dataReader.GetString(1);
+                            }
+                        }
+                    }
+                    conn.Close();
+                    return usernamefromdb;
+                }
+            }
+        }
     }
 }
+

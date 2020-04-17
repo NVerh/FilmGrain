@@ -30,7 +30,7 @@ namespace FilmGrain.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Login(AccountViewModel account)
+        public IActionResult Login(LoginViewModel account)
         {
 
             return View();
