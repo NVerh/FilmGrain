@@ -11,8 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DAL\DAL.csproj" />
-    <ProjectReference Include="..\DTO\DTO.csproj" />
+    <ProjectReference Include="..\DAL\FilmGrain.DAL.csproj" />
+    <ProjectReference Include="..\DTO\FilmGrain.DTO.csproj" />
     <ProjectReference Include="..\FilmGrain.Logic\FilmGrain.Logic.csproj" />
     <ProjectReference Include="..\Services\Services.csproj" />
   </ItemGroup>

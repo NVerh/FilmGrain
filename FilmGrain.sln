@@ -5,15 +5,15 @@ VisualStudioVersion = 16.0.29926.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmGrain", "FilmGrain\FilmGrain.csproj", "{AA80B71D-7D11-4E54-8229-C62DDDDA3683}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DTO", "DTO\DTO.csproj", "{7D30B1BA-EC9B-4177-BE69-AF9ECFD368BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmGrain.DTO", "DTO\FilmGrain.DTO.csproj", "{7D30B1BA-EC9B-4177-BE69-AF9ECFD368BE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{5BA86739-6D61-49AE-9403-D0A20CA266C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmGrain.DAL", "DAL\FilmGrain.DAL.csproj", "{5BA86739-6D61-49AE-9403-D0A20CA266C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{916059E7-79C4-4EFD-9A16-6B5D314E0324}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{916059E7-79C4-4EFD-9A16-6B5D314E0324}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilmGrain.Tests", "FilmGrain.Tests\FilmGrain.Tests.csproj", "{CFD68320-994D-4824-ACFF-1B0CF795D45A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmGrain.Tests", "FilmGrain.Tests\FilmGrain.Tests.csproj", "{CFD68320-994D-4824-ACFF-1B0CF795D45A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilmGrain.Logic", "FilmGrain.Logic\FilmGrain.Logic.csproj", "{4417AA36-0F88-413B-89A2-90182D5D3BA8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmGrain.Logic", "FilmGrain.Logic\FilmGrain.Logic.csproj", "{4417AA36-0F88-413B-89A2-90182D5D3BA8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
