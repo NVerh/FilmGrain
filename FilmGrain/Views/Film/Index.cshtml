@@ -1,0 +1,23 @@
+﻿@model FilmViewModel
+@{
+	ViewData["Title"] = "Index";
+}
+
+
+<div id="apiDiv">
+@using (Html.BeginForm())
+{
+	@Html.EditorFor(model => model.SearchText)
+	<button id="submit">Submit</button>
+	@Html.ValidationMessageFor(model => model.SearchText)
+}
+	<div class="pagingDiv">
+		@{
+			FilmGrain.Models.Paging.PagingInfo pagingInfo = (FilmGrain.Models.Paging.PagingInfo)ViewBag.Paging;
+			if (pagingInfo != null)
+			{
+				@ViewBag["Result"];
+				}
+			}
+	</div>
+</div>

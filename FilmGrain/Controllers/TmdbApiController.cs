@@ -26,14 +26,13 @@ namespace FilmGrain.Controllers
             if(page != null)
             {
                 CallAPIToGetFilm(MovieName, Convert.ToInt32(page));
-
             }
             FilmViewModel filmViewModel = new FilmViewModel();
             filmViewModel.SearchText = MovieName;
             return View(filmViewModel);
         }
         [HttpPost]
-        public IActionResult Index(Models.FilmViewModel FilmViewModel, string searchText)
+        public IActionResult Index(FilmViewModel FilmViewModel, string searchText)
         {
             if(ModelState.IsValid)
             {
@@ -55,20 +54,20 @@ namespace FilmGrain.Controllers
                 StringBuilder sb = new StringBuilder();
                 sb.Append("<div class=\"resultDiv\"><p>Names</p>");
                 ResponseSearchFilm rootObject = JsonConvert.DeserializeObject<ResponseSearchFilm>(apiResponse);
-                foreach(ResultViewModel result in rootObject.Results)
+                foreach (ResultViewModel result in rootObject.Results)
                 {
                     string image = result.PosterPath == null ? Url.Content("~/Content/Image/no-image.png") : "https://image.tmdb.org/t/p/w500/" + result.PosterPath;
-                    string link = Url.Action("GetFilm", "Film", new {  result.Id });
+                    string link = Url.Action("GetFilm", "Film", new { result.Id });
 
                     sb.Append("<div class=\"result\" resourceId=\" " + result.Id + "\">" + "<a href=\"" + link + "\"><img src=\"" + image + "\" />" + "<p>" + result.Title + "</a></p></div>");
                 }
-                ViewBag.Result = sb.ToString();
+                ViewBag["Result"] = sb.ToString();
                 int pageSize = 20;
                 PagingInfo paginginfo = new PagingInfo();
                 paginginfo.CurrentPage = pageNo;
                 paginginfo.TotalItems = rootObject.TotalResults;
                 paginginfo.ItemsPerPage = pageSize;
-                ViewBag.Paging = paginginfo;
+                ViewBag["Paging"] = paginginfo;
             }
         }
     }

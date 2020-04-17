@@ -12,6 +12,16 @@ namespace FilmGrain.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public IActionResult Index(string searchText)
+        {
+            if(ModelState.IsValid)
+            {
+                return RedirectToAction("TmdbApi","Index");
+            }
+            return View();
+        }
+        [HttpGet]
         public IActionResult GetFilm(int id)
         {
             return View();
