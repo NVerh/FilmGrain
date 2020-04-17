@@ -39,6 +39,7 @@ namespace FilmGrain.Controllers
         {
             if(ModelState.IsValid)
             {
+
                 var salt = PasswordSalt.Create();
                 account.Password = PasswordHash.Create(account.Password, salt);
                 _userLogic.CreateAccount(_mapper.Map<UserDTO>(account));

@@ -1,6 +1,7 @@
 ﻿using System;
 using DAL.Interface;
 using DTO;
+using FilmGrain.Logic.Exceptions;
 
 namespace FilmGrain.Logic
 {
@@ -14,11 +15,14 @@ namespace FilmGrain.Logic
         }
         public void CreateAccount(UserDTO user)
         {
-            if (CheckIfAccountAlreadyExists(user))
+                if (CheckIfAccountAlreadyExists(user))
+                {
+                    _userContext.AddAccountToDB(user);
+                }
+            else
             {
-
+                throw new UserLogicException(string.Format("User Already Exists!"));
             }
-            _userContext.AddAccountToDB(user);
         }
 
         public UserDTO GetAccount(string username, string password)
