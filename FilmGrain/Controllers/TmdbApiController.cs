@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using FilmGrain.Models;
 using FilmGrain.Models.Film;
 using FilmGrain.Models.Paging;
 using Microsoft.AspNetCore.Mvc;
@@ -27,6 +28,18 @@ namespace FilmGrain.Controllers
                 CallAPIToGetFilm(MovieName, Convert.ToInt32(page));
 
             }
+            FilmViewModel filmViewModel = new FilmViewModel();
+            filmViewModel.SearchText = MovieName;
+            return View(filmViewModel);
+        }
+        [HttpPost]
+        public IActionResult Index(Models.FilmViewModel FilmViewModel, string searchText)
+        {
+            if(ModelState.IsValid)
+            {
+                CallAPIToGetFilm(searchText, 0);
+            }
+            return View(FilmViewModel);
         }
         public void CallAPIToGetFilm(string searchText, int page)
         {
@@ -45,7 +58,7 @@ namespace FilmGrain.Controllers
                 foreach(ResultViewModel result in rootObject.Results)
                 {
                     string image = result.PosterPath == null ? Url.Content("~/Content/Image/no-image.png") : "https://image.tmdb.org/t/p/w500/" + result.PosterPath;
-                    string link = Url.Action("GetFilm", "Film", new { id, result.Id });
+                    string link = Url.Action("GetFilm", "Film", new {  result.Id });
 
                     sb.Append("<div class=\"result\" resourceId=\" " + result.Id + "\">" + "<a href=\"" + link + "\"><img src=\"" + image + "\" />" + "<p>" + result.Title + "</a></p></div>");
                 }

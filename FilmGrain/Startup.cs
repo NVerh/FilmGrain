@@ -19,7 +19,7 @@ using FilmGrain.Logic;
 using DTO;
 using DAL.Interface;
 using DAL.Concrete;
-
+using System.Security.Policy;
 
 namespace FilmGrain
 {
@@ -73,6 +73,7 @@ namespace FilmGrain
             app.UseRouting();
             app.UseSession();
             app.UseAuthentication();
+            app.UseMvc();
 
             app.UseAuthorization();
 
@@ -81,6 +82,7 @@ namespace FilmGrain
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                  
             });
         }
     }

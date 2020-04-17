@@ -11,6 +11,7 @@ namespace FilmGrain.Models
     {
         [Required]
         public int Id { get; set; }
+        public string SearchText { get; set; }
         public string Title { get; set; }
         public int? Runtime { get; set; }
         public List<GenreViewModel> Genres { get; set; }
