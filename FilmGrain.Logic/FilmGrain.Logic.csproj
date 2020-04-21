@@ -10,8 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DAL\FilmGrain.DAL.csproj" />
-    <ProjectReference Include="..\DTO\FilmGrain.DTO.csproj" />
+    <ProjectReference Include="..\DTO\FilmGrain.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>

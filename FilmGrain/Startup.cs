@@ -17,7 +17,6 @@ using AutoMapper;
 using FilmGrain.Repositories;
 using FilmGrain.Logic;
 using DTO;
-using DAL.Interface;
 using DAL.Concrete;
 using System.Security.Policy;
 

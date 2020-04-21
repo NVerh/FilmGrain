@@ -1,6 +1,6 @@
 ﻿using System;
-using DAL.Interface;
 using DTO;
+using FilmGrain.Interfaces;
 using FilmGrain.Logic.Exceptions;
 
 namespace FilmGrain.Logic

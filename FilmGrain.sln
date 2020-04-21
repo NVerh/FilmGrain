@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29926.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmGrain", "FilmGrain\FilmGrain.csproj", "{AA80B71D-7D11-4E54-8229-C62DDDDA3683}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmGrain.DTO", "DTO\FilmGrain.DTO.csproj", "{7D30B1BA-EC9B-4177-BE69-AF9ECFD368BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmGrain.Interfaces", "DTO\FilmGrain.Interfaces.csproj", "{7D30B1BA-EC9B-4177-BE69-AF9ECFD368BE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmGrain.DAL", "DAL\FilmGrain.DAL.csproj", "{5BA86739-6D61-49AE-9403-D0A20CA266C2}"
 EndProject

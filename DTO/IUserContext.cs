@@ -1,9 +1,9 @@
-﻿using DTO;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using FilmGrain.Interfaces;
 
-namespace DAL.Interface
+namespace FilmGrain.Interfaces.Interfaces
 {
     public interface IUserContext
     {

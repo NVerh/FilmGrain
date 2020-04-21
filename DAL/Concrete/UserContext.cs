@@ -1,6 +1,4 @@
-﻿using DAL.Interface;
-using DTO;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Text;
@@ -8,6 +6,7 @@ using System.Data.SqlClient;
 using DAL.Access;
 using System.Data.Common;
 using System.Linq.Expressions;
+using FilmGrain.Interfaces.DTO
 
 namespace DAL.Concrete
 {
