@@ -19,7 +19,7 @@ using FilmGrain.Logic;
 using DTO;
 using DAL.Concrete;
 using System.Security.Policy;
-using FilmGrain.Interfaces.Interfaces;
+using FilmGrain.Interfaces;
 
 namespace FilmGrain
 {
@@ -48,7 +48,6 @@ namespace FilmGrain
             services.AddScoped<PasswordSalt>();
             services.AddScoped<PasswordHash>();
             services.AddScoped<LoginRepository>();
-            services.AddScoped<IUserContext, UserContext>();
             services.AddScoped<UserLogic>();
             services.AddAutoMapper(typeof(MappingBootstrapper));
             DBAccess._connectionstring = (Configuration.GetConnectionString("DefaultConnection"));            

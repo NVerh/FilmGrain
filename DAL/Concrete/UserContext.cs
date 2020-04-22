@@ -7,7 +7,7 @@ using DAL.Access;
 using System.Data.Common;
 using System.Linq.Expressions;
 using DTO;
-using FilmGrain.Interfaces.Interfaces;
+using FilmGrain.Interfaces.DAL;
 
 namespace DAL.Concrete
 {
@@ -29,7 +29,6 @@ namespace DAL.Concrete
                     cmd.ExecuteNonQuery();
                     conn.Dispose();
                 }
-
             }
         }
 

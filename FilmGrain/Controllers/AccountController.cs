@@ -6,20 +6,20 @@ using FilmGrain.Models.User;
 using FilmGrain.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Services;
-using FilmGrain.Logic;
 using AutoMapper;
 using DTO;
+using FilmGrain.Interfaces.Logic;
 
 namespace FilmGrain.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly LoginRepository _loginRepo;
-        private readonly UserLogic _userLogic;
+        private readonly ILoginRepository _loginRepo;
+        private readonly IUserLogic _userLogic;
         private readonly IMapper _mapper;
         
 
-        public AccountController(LoginRepository loginRepo, UserLogic userLogic, IMapper mapper )
+        public AccountController(ILoginRepository loginRepo, IUserLogic userLogic, IMapper mapper )
         {
             _loginRepo = loginRepo;
             _userLogic = userLogic;

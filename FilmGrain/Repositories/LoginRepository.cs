@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace FilmGrain.Repositories
 {
-    public class LoginRepository
+    public class LoginRepository : ILoginRepository
     {
         private readonly IHttpContextAccessor _contextAccessor;
 
