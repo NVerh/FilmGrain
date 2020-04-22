@@ -1,6 +1,7 @@
 ﻿using System;
 using DTO;
 using FilmGrain.Interfaces;
+using FilmGrain.Interfaces.Interfaces;
 using FilmGrain.Logic.Exceptions;
 
 namespace FilmGrain.Logic

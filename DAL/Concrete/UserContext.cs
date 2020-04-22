@@ -6,7 +6,8 @@ using System.Data.SqlClient;
 using DAL.Access;
 using System.Data.Common;
 using System.Linq.Expressions;
-using FilmGrain.Interfaces.DTO
+using DTO;
+using FilmGrain.Interfaces.Interfaces;
 
 namespace DAL.Concrete
 {
