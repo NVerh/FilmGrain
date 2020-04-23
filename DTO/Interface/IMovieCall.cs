@@ -9,6 +9,6 @@ namespace FilmGrain.Interfaces.Interface
 {
     public interface IMovieCall
     {
-        public Task<ApiSearchResponse<MovieInfo>> GetMovieInformation(string keyword);
+        public Task<ApiSearchResponse<MovieInfo>> GetMovieInfo(string keyword);
     }
 }

@@ -11,7 +11,7 @@ namespace FilmGrain.API
 {
     public class MovieCall : IMovieCall
     {
-        public async Task<ApiSearchResponse<MovieInfo>> GetMovieInformation(string keyword)
+        public async Task<ApiSearchResponse<MovieInfo>> GetMovieInfo(string keyword)
         {
             var movieApi = MovieDbFactory.Create<IApiMovieRequest>().Value;
             ApiSearchResponse<MovieInfo> response = await movieApi.SearchByTitleAsync(keyword);
