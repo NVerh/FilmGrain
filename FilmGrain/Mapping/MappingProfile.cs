@@ -1,11 +1,11 @@
-﻿using DTO;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using FilmGrain.Models;
 using FilmGrain.Models.User;
+using FilmGrain.Interfaces;
 
 namespace FilmGrain.Mapping
 {
