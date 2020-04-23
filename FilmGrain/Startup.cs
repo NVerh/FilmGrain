@@ -19,7 +19,8 @@ using FilmGrain.Logic;
 using DTO;
 using DAL.Concrete;
 using FilmGrain.Interfaces;
-
+using FilmGrain.API;
+using DM.MovieApi;
 
 namespace FilmGrain
 {
@@ -51,7 +52,9 @@ namespace FilmGrain
             services.AddScoped<IUserContext, UserContext>();
             services.AddScoped<UserLogic>();
             services.AddAutoMapper(typeof(MappingBootstrapper));
-            DBAccess._connectionstring = (Configuration.GetConnectionString("DefaultConnection"));            
+            DBAccess._connectionstring = (Configuration.GetConnectionString("DefaultConnection"));
+            MovieDbFactory.RegisterSettings(new MovieDbSettings());
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
