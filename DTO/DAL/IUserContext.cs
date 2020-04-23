@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DAL.Interface
+namespace FilmGrain.Interfaces.DAL
 {
-    public interface IUserContext
+    interface IUserContext
     {
         void AddAccountToDB(UserDTO user);
         UserDTO GetAccountFromDB(string username, string password);

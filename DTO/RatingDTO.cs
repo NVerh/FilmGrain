@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DTO
+namespace FilmGrain.Interfaces
 {
     public class RatingDTO
     {
