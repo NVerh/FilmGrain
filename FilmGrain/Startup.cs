@@ -19,6 +19,7 @@ using FilmGrain.Interfaces.DAL;
 using FilmGrain.Interfaces.Logic;
 using DAL.Access;
 using DAL.Concrete;
+using FilmGrain.DAL.Concrete;
 
 namespace FilmGrain
 {
@@ -49,6 +50,8 @@ namespace FilmGrain
             services.AddScoped<LoginRepository>();
             services.AddScoped<IUserContext, UserContext>();
             services.AddScoped<IUserLogic, UserLogic>();
+            services.AddScoped<IMovieContext, MovieContext>();
+            services.AddScoped<IMovieLogic, MovieLogic>();
             services.AddAutoMapper(typeof(MappingBootstrapper));
             DBAccess._connectionstring = (Configuration.GetConnectionString("DefaultConnection"));            
         }
