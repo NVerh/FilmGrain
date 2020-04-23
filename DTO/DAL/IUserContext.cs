@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FilmGrain.Interfaces.DAL
 {
-    interface IUserContext
+    public interface IUserContext
     {
         void AddAccountToDB(UserDTO user);
         UserDTO GetAccountFromDB(string username, string password);

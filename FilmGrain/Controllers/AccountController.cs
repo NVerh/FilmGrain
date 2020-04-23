@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Services;
 using FilmGrain.Logic;
 using AutoMapper;
-using DTO;
+using FilmGrain.Interfaces;
 
 namespace FilmGrain.Controllers
 {
