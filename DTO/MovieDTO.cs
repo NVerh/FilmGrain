@@ -5,11 +5,11 @@ using System.Text;
 
 namespace FilmGrain.Interfaces
 {
-    public class FilmDTO
+    public class MovieDTO
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public GenreDTO MyProperty { get; set; }
+        public List<GenreDTO> Genre { get; set; }
         public string Director { get; set; }
         public DateTime DateReleased { get; set; }
         public decimal AverageRating { get; set; }
