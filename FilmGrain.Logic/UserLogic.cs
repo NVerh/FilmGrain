@@ -2,10 +2,11 @@
 using FilmGrain.Interfaces.DAL;
 using FilmGrain.Logic.Exceptions;
 using FilmGrain.Interfaces;
+using FilmGrain.Interfaces.Logic;
 
 namespace FilmGrain.Logic
 {
-    public class UserLogic
+    public class UserLogic : IUserLogic
     {
         private readonly IUserContext _userContext;
 

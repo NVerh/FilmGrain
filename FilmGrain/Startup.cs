@@ -10,16 +10,15 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Identity;
 using FilmGrain.Models;
-using DAL.Access;
 using Services;
 using FilmGrain.Mapping;
 using AutoMapper;
 using FilmGrain.Repositories;
 using FilmGrain.Logic;
-using DTO;
-using DAL.Interface;
+using FilmGrain.Interfaces.DAL;
+using FilmGrain.Interfaces.Logic;
+using DAL.Access;
 using DAL.Concrete;
-
 
 namespace FilmGrain
 {
@@ -49,7 +48,7 @@ namespace FilmGrain
             services.AddScoped<PasswordHash>();
             services.AddScoped<LoginRepository>();
             services.AddScoped<IUserContext, UserContext>();
-            services.AddScoped<UserLogic>();
+            services.AddScoped<IUserLogic, UserLogic>();
             services.AddAutoMapper(typeof(MappingBootstrapper));
             DBAccess._connectionstring = (Configuration.GetConnectionString("DefaultConnection"));            
         }
