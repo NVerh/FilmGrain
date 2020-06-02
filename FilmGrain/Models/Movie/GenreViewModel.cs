@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace FilmGrain.Interfaces
+namespace FilmGrain.Models.Movie
 {
-    public class GenreDTO
+    public class GenreViewModel
     {
-        public int Id { get; set; }
         public string Description { get; set; }
     }
 }

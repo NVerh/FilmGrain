@@ -10,6 +10,7 @@ namespace FilmGrain.Interfaces
         public UserDTO UserId { get; set; }
         public List<MovieDTO> WatchedMovies { get; set; }
         public List<MovieDTO> FavoriteMovies { get; set; }
-        public ICollection<ReviewDTO> Reviews { get; set; }
+        public List<ReviewDTO> Reviews { get; set; }
+        public List<RatingDTO> Ratings { get; set; }
     }
 }

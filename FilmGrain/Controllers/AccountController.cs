@@ -29,22 +29,5 @@ namespace FilmGrain.Controllers
         {
             return View();
         }
-        [HttpPost]
-        public IActionResult Login(LoginViewModel account)
-        {
-
-            return View();
-        }
-        public IActionResult Register(RegisterViewModel account)
-        {
-            if(ModelState.IsValid)
-            {
-
-                var salt = PasswordSalt.Create();
-                account.Password = PasswordHash.Create(account.Password, salt);
-                _userLogic.CreateAccount(_mapper.Map<UserDTO>(account));
-            }
-            return View();
-        }
     }
 }

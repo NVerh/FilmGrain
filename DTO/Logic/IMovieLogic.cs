@@ -7,6 +7,7 @@ namespace FilmGrain.Interfaces.Logic
 {
     public interface IMovieLogic
     {
-
+        public IEnumerable<MovieDTO> GetMovies(string searchString);
+        public MovieDTO FilterMoviesByString(string searchString, IEnumerable<MovieDTO> movies);
     }
 }

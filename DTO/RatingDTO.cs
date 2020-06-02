@@ -7,6 +7,6 @@ namespace FilmGrain.Interfaces
     public class RatingDTO
     {
         public int Id { get; set; }
-        public decimal Value { get; set; }
+        public int Value { get; set; }
     }
 }

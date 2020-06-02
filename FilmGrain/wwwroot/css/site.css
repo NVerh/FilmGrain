@@ -69,3 +69,24 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+.poster-list.-horizontal {
+    display: flex;
+    justify-content:space-between;
+    flex-wrap: wrap;
+    margin-left: -10px;
+}
+.poster-list {
+    overflow: hidden;
+}
+.title-hero {
+    font-size: 2rem;
+    line-height: 1.23076923;
+    color: #abc;
+}
+.title-hero, .title- maxi {
+    font-family: Graphik-Light-Web, sans-serif;
+    font-weight: 400;
+    text-align: center;
+    margin: 0, 0, 2.30769231rem;
+}
+
