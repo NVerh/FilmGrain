@@ -23,6 +23,7 @@ namespace FilmGrain.Controllers
         {
             return View();
         }
+        [HttpPost]
         public IActionResult GetMovie(string searchstring)
         {
             MovieViewModel movieVM = new MovieViewModel();
