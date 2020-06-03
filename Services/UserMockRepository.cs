@@ -14,6 +14,11 @@ namespace Services
             throw new NotImplementedException();
         }
 
+        public UserDTO GetAccountByEmail(string email)
+        {
+            throw new NotImplementedException();
+        }
+
         public UserDTO GetAccountFromDB(string username, string password)
         {
             throw new NotImplementedException();

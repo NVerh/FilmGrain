@@ -1,5 +1,5 @@
 ﻿using DAL.Access;
-using FilmGrain.Interfaces;
+using FilmGrain.DTO;
 using FilmGrain.Interfaces.DAL;
 using System;
 using System.Collections.Generic;

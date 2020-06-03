@@ -4,6 +4,7 @@ using FilmGrain.Logic.Exceptions;
 using FilmGrain.Interfaces;
 using FilmGrain.Interfaces.Logic;
 using FilmGrain.DTO;
+using Services;
 
 namespace FilmGrain.Logic
 {
@@ -18,7 +19,8 @@ namespace FilmGrain.Logic
 
         public void CreateAccount(UserDTO user)
         {
-            throw new NotImplementedException();
+            user.Password = PasswordHash.Create(user.Password, PasswordSalt.Create());
+            _userContext.AddAccountToDB(user);
         }
 
         public UserDTO GetAccount(string username, string password)

@@ -1,4 +1,4 @@
-﻿using FilmGrain.Interfaces;
+﻿using FilmGrain.DTO;
 using FilmGrain.Interfaces.DAL;
 using FilmGrain.Interfaces.Logic;
 using System;

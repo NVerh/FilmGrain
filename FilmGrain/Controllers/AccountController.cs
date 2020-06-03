@@ -42,7 +42,7 @@ namespace FilmGrain.Controllers
             {
                 _userLogic.CreateAccount(_mapper.Map<UserDTO>(model));
                 ViewData["Message"] = "Account Created!";
-                return View(model);
+                return RedirectToAction("Login");
             }
             return View();
         }
@@ -60,15 +60,20 @@ namespace FilmGrain.Controllers
                 if(!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
                 {
                     var user = _userLogic.GetAccountByEmail(model.Email);
-                    if(user == null)
+                    if(user != null)
                     {
-                        return View();
+                        _loginRepo.SetLoginSession(user.UserName, user.Id);
+                        return RedirectToAction("Index", "Home");
                     }
-                    return View(user);
+                    return View();
                 }
             }
             return View();
-
+        }
+        public IActionResult Logout()
+        {
+            _loginRepo.RemoveLoginSession();
+            return RedirectToAction("Login");
         }
     }
 }

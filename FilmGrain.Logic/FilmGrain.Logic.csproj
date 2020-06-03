@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DTO\FilmGrain.Interfaces.csproj" />
+    <ProjectReference Include="..\Services\Services.csproj" />
   </ItemGroup>
 
 </Project>
