@@ -25,6 +25,10 @@ namespace FilmGrain.Logic
         {
             throw new NotImplementedException();
         }
+        public UserDTO GetAccountByEmail(string email)
+        {
+            return _userContext.GetAccountByEmail(email);
+        }
 
         public bool Login(UserDTO user)
         {

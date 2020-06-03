@@ -9,6 +9,7 @@ using Services;
 using AutoMapper;
 using FilmGrain.Interfaces;
 using FilmGrain.Interfaces.Logic;
+using FilmGrain.DTO;
 
 namespace FilmGrain.Controllers
 {
@@ -28,6 +29,46 @@ namespace FilmGrain.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterViewModel model)
+        {
+            if(!ModelState.IsValid)
+            {
+                _userLogic.CreateAccount(_mapper.Map<UserDTO>(model));
+                ViewData["Message"] = "Account Created!";
+                return View(model);
+            }
+            return View();
+        }
+        [HttpGet]
+        public IActionResult Login(string returnUrl = "")
+        {
+            var model = new LoginViewModel { ReturnUrl = returnUrl };
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult Login(LoginViewModel model)
+        {
+            if(!ModelState.IsValid)
+            {
+                if(!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
+                {
+                    var user = _userLogic.GetAccountByEmail(model.Email);
+                    if(user == null)
+                    {
+                        return View();
+                    }
+                    return View(user);
+                }
+            }
+            return View();
+
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using FilmGrain.Models;
 using FilmGrain.Models.User;
-using FilmGrain.Interfaces;
+using FilmGrain.DTO;
 
 namespace FilmGrain.Mapping
 {

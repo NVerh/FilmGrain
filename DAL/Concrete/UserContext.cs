@@ -61,6 +61,32 @@ namespace DAL.Concrete
             }
             return user;
         }
+        public UserDTO GetAccountByEmail(string email)
+        {
+            UserDTO user = new UserDTO();
+            using(SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
+            {
+                using (SqlCommand cmd = new SqlCommand("dbo.spUser_GetUserByEmail", conn))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Email", email);
+                    conn.Open();
+                    using (SqlDataReader dataReader = cmd.ExecuteReader())
+                    {
+                        while (dataReader.Read())
+                        {
+                            user.Id = dataReader.GetInt32(0);
+                            user.UserName = dataReader.GetString(1);
+                            user.Password = dataReader.GetString(2);
+                            user.IsAdmin = dataReader.GetBoolean(3);
+                            user.Email = dataReader.GetString(4);
+                        }
+                    }
+                    conn.Close();
+                }
+            }
+            return user;
+        }
         public string GetAccountName(string username)
         {
             string usernamefromdb = null;

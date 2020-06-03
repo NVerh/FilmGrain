@@ -11,5 +11,6 @@ namespace FilmGrain.Interfaces.DAL
         void AddAccountToDB(UserDTO user);
         UserDTO GetAccountFromDB(string username, string password);
         string GetAccountName(string username);
+        UserDTO GetAccountByEmail(string email);
     }
 }

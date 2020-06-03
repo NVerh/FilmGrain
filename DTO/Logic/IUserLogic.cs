@@ -10,5 +10,6 @@ namespace FilmGrain.Interfaces.Logic
         public void CreateAccount(UserDTO user);
         public UserDTO GetAccount(string username, string password);
         public bool Login(UserDTO user);
+        public UserDTO GetAccountByEmail(string email);
     }
 }
