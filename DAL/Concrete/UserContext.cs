@@ -8,6 +8,7 @@ using DAL.Access;
 using System.Data.Common;
 using System.Linq.Expressions;
 using FilmGrain.Interfaces.DAL;
+using FilmGrain.DTO;
 
 namespace DAL.Concrete
 {

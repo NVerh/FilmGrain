@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 
-namespace FilmGrain.Interfaces
+namespace FilmGrain.DTO
 {
     public class MovieDTO
     {

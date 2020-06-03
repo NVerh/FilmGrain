@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FilmGrain.Interfaces
+namespace FilmGrain.DTO
 {
     public class UserDTO
     {

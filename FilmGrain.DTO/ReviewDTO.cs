@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using FilmGrain.Interfaces;
 
-namespace FilmGrain.Interfaces
+namespace FilmGrain.DTO
 {
     public class ReviewDTO
     {
