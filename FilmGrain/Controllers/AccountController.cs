@@ -36,7 +36,7 @@ namespace FilmGrain.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterViewModel model)
+        public IActionResult Register(RegisterViewModel model)
         {
             if(!ModelState.IsValid)
             {
@@ -44,7 +44,7 @@ namespace FilmGrain.Controllers
                 ViewData["Message"] = "Account Created!";
                 return RedirectToAction("Login");
             }
-            return View();
+            return View(ModelState.Values.SelectMany(v => v.Errors).ElementAt(0));
         }
         [HttpGet]
         public IActionResult Login(string returnUrl = "")
@@ -68,7 +68,7 @@ namespace FilmGrain.Controllers
                     return View();
                 }
             }
-            return View();
+            return View(ModelState.Values.SelectMany(v => v.Errors).ElementAt(0));
         }
         public IActionResult Logout()
         {
