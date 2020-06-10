@@ -10,6 +10,7 @@ using AutoMapper;
 using FilmGrain.Interfaces;
 using FilmGrain.Interfaces.Logic;
 using FilmGrain.DTO;
+using System.Linq.Expressions;
 
 namespace FilmGrain.Controllers
 {
@@ -18,7 +19,6 @@ namespace FilmGrain.Controllers
         private readonly LoginRepository _loginRepo;
         private readonly IUserLogic _userLogic;
         private readonly IMapper _mapper;
-        
 
         public AccountController(LoginRepository loginRepo, IUserLogic userLogic, IMapper mapper )
         {
@@ -38,13 +38,16 @@ namespace FilmGrain.Controllers
         [HttpPost]
         public IActionResult Register(RegisterViewModel model)
         {
-            if(!ModelState.IsValid)
+            try
             {
                 _userLogic.CreateAccount(_mapper.Map<UserDTO>(model));
                 ViewData["Message"] = "Account Created!";
                 return RedirectToAction("Login");
             }
-            return View(ModelState.Values.SelectMany(v => v.Errors).ElementAt(0));
+            catch(Exception e)
+            {
+                return View(e);
+            }
         }
         [HttpGet]
         public IActionResult Login(string returnUrl = "")
@@ -55,20 +58,20 @@ namespace FilmGrain.Controllers
         [HttpPost]
         public IActionResult Login(LoginViewModel model)
         {
-            if(!ModelState.IsValid)
+            try
             {
-                if(!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
+                var user = _userLogic.GetAccountByEmail(model.Email);
+                if (user != null)
                 {
-                    var user = _userLogic.GetAccountByEmail(model.Email);
-                    if(user != null)
-                    {
-                        _loginRepo.SetLoginSession(user.UserName, user.Id);
-                        return RedirectToAction("Index", "Home");
-                    }
-                    return View();
+                    _loginRepo.SetLoginSession(user.UserName, user.Id);
+                    return RedirectToAction("Index", "Home");
                 }
             }
-            return View(ModelState.Values.SelectMany(v => v.Errors).ElementAt(0));
+            catch
+            {
+                return View(ModelState.Values.SelectMany(v => v.Errors).ElementAt(0));
+            }
+            return View();
         }
         public IActionResult Logout()
         {

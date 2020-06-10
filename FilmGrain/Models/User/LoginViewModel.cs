@@ -9,7 +9,7 @@ namespace FilmGrain.Models.User
     public class LoginViewModel
     {
         [Required(ErrorMessage = "Please Fill in a E-mail adress!")]
-        [EmailAddress]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
         [Required]
