@@ -6,6 +6,7 @@ using AutoMapper;
 using FilmGrain.Models;
 using FilmGrain.Models.User;
 using FilmGrain.DTO;
+using FilmGrain.Models.Movie;
 
 namespace FilmGrain.Mapping
 {
@@ -14,6 +15,8 @@ namespace FilmGrain.Mapping
         public MappingProfile()
         {
             CreateMap<UserDTO, RegisterViewModel>().ReverseMap();
+            CreateMap<MovieDTO, MovieViewModel>().ReverseMap();
+            CreateMap<MoviePosterDTO, MoviePosterViewModel>().ReverseMap();
         }
     }
 }

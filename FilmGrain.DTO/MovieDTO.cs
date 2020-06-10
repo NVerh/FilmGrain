@@ -13,5 +13,6 @@ namespace FilmGrain.DTO
         public string Director { get; set; }
         public DateTime DateReleased { get; set; }
         public decimal AverageRating { get; set; }
+        public string PosterURL { get; set; }
     }
 }

@@ -113,6 +113,26 @@ namespace DAL.Concrete
                 }
             }
         }
+
+        public string Create(UserDTO obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public UserDTO Read(string key)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(UserDTO obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(UserDTO obj)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

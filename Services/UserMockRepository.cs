@@ -14,6 +14,16 @@ namespace Services
             throw new NotImplementedException();
         }
 
+        public string Create(UserDTO obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(UserDTO obj)
+        {
+            throw new NotImplementedException();
+        }
+
         public UserDTO GetAccountByEmail(string email)
         {
             throw new NotImplementedException();
@@ -25,6 +35,16 @@ namespace Services
         }
 
         public string GetAccountName(string username)
+        {
+            throw new NotImplementedException();
+        }
+
+        public UserDTO Read(string key)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(UserDTO obj)
         {
             throw new NotImplementedException();
         }

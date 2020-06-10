@@ -37,5 +37,13 @@ namespace FilmGrain.Logic
         {
             throw new NotImplementedException();
         }
+        public IEnumerable<MovieDTO> GetRandomMovies()
+        {
+            return _context.GetRandomMovies();
+        }
+        public IEnumerable<MoviePosterDTO> GetRandomPosters()
+        {
+            return _context.GetRandomPosters();
+        }
     }
 }

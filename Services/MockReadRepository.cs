@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Services
 {
-    public class MockReadRepository : IReadRepository
+    public class MockReadRepository : IMovieContext, IReadRepository
     {
         List<MovieDTO> _movies = new List<MovieDTO>
         {
@@ -18,10 +18,45 @@ namespace Services
             new MovieDTO{ Id = 5, Title = "Tremors", Director ="Ron Underwood", DateReleased = new DateTime(1990,9,8), AverageRating = 3.9m},
         };
 
+        public string Create(MovieDTO obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(MovieDTO obj)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<MovieDTO> GetMovies(int Id)
         {
             var movies = _movies.Where(m => m.Title.Equals(Id));
             return movies;
+        }
+
+        public IEnumerable<MovieDTO> GetMovies(string searchString)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<MovieDTO> GetRandomMovies()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<MoviePosterDTO> GetRandomPosters()
+        {
+            throw new NotImplementedException();
+        }
+
+        public MovieDTO Read(string key)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(MovieDTO obj)
+        {
+            throw new NotImplementedException();
         }
     }
 }

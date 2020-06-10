@@ -9,6 +9,8 @@ namespace FilmGrain.Interfaces.Logic
     public interface IMovieLogic
     {
         public IEnumerable<MovieDTO> GetMovies(string searchString);
+        public IEnumerable<MovieDTO> GetRandomMovies();
+        public IEnumerable<MoviePosterDTO> GetRandomPosters();
         public MovieDTO FilterMoviesByString(string searchString, IEnumerable<MovieDTO> movies);
     }
 }

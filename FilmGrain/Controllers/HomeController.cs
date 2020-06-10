@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using FilmGrain.Models;
 using FilmGrain.Interfaces.Logic;
+using AutoMapper;
+using FilmGrain.Models.Movie;
+using FilmGrain.DTO;
 
 namespace FilmGrain.Controllers
 {
@@ -14,16 +17,19 @@ namespace FilmGrain.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IMovieLogic _movie;
+        private readonly IMapper _mapper;
 
-        public HomeController(ILogger<HomeController> logger, IMovieLogic movie)
+        public HomeController(ILogger<HomeController> logger, IMovieLogic movie, IMapper mapper)
         {
             _logger = logger;
             _movie = movie;
+            _mapper = mapper;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(IndexViewModel index)
         {
-            return View();
+            index.RandomMoviePosters = _mapper.Map<IEnumerable<MoviePosterDTO>, List<MoviePosterViewModel>>(_movie.GetRandomPosters());
+            return View(index);
         }
 
         public IActionResult Privacy()
