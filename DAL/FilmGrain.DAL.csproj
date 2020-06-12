@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DTO\FilmGrain.Interfaces.csproj" />
-    <ProjectReference Include="..\FilmGrain.DTO\FilmGrain.DTO.csproj" />
   </ItemGroup>
 
 </Project>
