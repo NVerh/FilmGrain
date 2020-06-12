@@ -14,7 +14,7 @@
 			@foreach (var Movie in Model.RandomMoviePosters)
 			{
 				<li class="list-group-item">
-						<h5>@Movie.Title</h5>
+						<h5><a asp-action="GoToOverview">@Movie.Title</a> </h5>
 						<img src="@Movie.Url"/>
 				</li>
 			}

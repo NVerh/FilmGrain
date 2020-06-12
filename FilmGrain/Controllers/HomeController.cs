@@ -51,5 +51,9 @@ namespace FilmGrain.Controllers
             }
             return View();
         }
+        public IActionResult GoToOverview(MovieViewModel movie)
+        {
+            return RedirectToAction("Overview", "Movie");
+        }
     }
 }

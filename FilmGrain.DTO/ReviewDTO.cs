@@ -8,6 +8,6 @@ namespace FilmGrain.DTO
     {
         public int Id { get; set; }
         public MovieDTO ReviewedMovie{ get; set; }
-        public RatingDTO FilmRating { get; set; }
+        public RatingDTO MovieRating { get; set; }
     }
 }

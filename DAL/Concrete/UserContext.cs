@@ -114,24 +114,88 @@ namespace DAL.Concrete
             }
         }
 
-        public string Create(UserDTO obj)
+        public void Create(UserDTO obj)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand("dbo.spAccount_Create", conn))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Email", obj.Email);
+                    cmd.Parameters.AddWithValue("@Password", obj.Password);
+                    cmd.Parameters.AddWithValue("@Username", obj.UserName);
+                    cmd.Parameters.AddWithValue("@IsAdmin", obj.IsAdmin);
+                    cmd.ExecuteNonQuery();
+
+                }
+                conn.Close();
+            }
         }
 
         public UserDTO Read(string key)
         {
-            throw new NotImplementedException();
+            UserDTO user = new UserDTO();
+            using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand("dbo.spAccount_Read", conn))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Id", key);
+                    using (SqlDataReader datareader = cmd.ExecuteReader())
+                    {
+                        while (datareader.Read())
+                        {
+                            int Id = datareader.GetInt32(0);
+                            string Email = datareader.GetString(1);
+                            string Password = datareader.GetString(2);
+                            string Username = datareader.GetString(3);
+                            bool IsAdmin = datareader.GetBoolean(4);
+                            if (!datareader.IsDBNull(0))
+                            {
+                                user.Id = Id;
+                                user.Email = Email;
+                                user.Password = Password;
+                                user.UserName = Username;
+                                user.IsAdmin = IsAdmin;
+                            }
+                        }
+                    }
+                    conn.Close();
+                }
+            }
+            return user;
         }
 
         public void Update(UserDTO obj)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand("dbo.spAccount_Update", conn))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Username", obj.UserName);
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+            }
         }
 
         public void Delete(UserDTO obj)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand("dbo.spAccount_Delete", conn))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@key", obj.Id);
+                    cmd.ExecuteNonQuery();
+                }
+                conn.Close();
+            }
         }
     }
 }

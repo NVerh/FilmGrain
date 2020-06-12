@@ -48,5 +48,10 @@ namespace Services
         {
             throw new NotImplementedException();
         }
+
+        void ICRUDContext<UserDTO>.Create(UserDTO obj)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

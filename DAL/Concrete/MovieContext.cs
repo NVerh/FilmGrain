@@ -7,19 +7,45 @@ using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Xml;
 
 namespace FilmGrain.DAL.Concrete
 {
     public class MovieContext : IMovieContext
     {
-        public string Create(MovieDTO obj)
+        public void Create(MovieDTO obj)
         {
-            throw new NotImplementedException();
+            using(SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
+            {
+                conn.Open();
+                using(SqlCommand cmd = new SqlCommand("dbo.spMovie_Create", conn))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Title", obj.Title);
+                    cmd.Parameters.AddWithValue("@ReleaseDate", obj.DateReleased);
+                    cmd.Parameters.AddWithValue("@Director", obj.Director);
+                    cmd.Parameters.AddWithValue("@Rating", obj.AverageRating);
+                    cmd.Parameters.AddWithValue("@Genre", obj.Genre);
+                    cmd.ExecuteNonQuery();
+
+                }
+                conn.Close();
+            }
         }
 
         public void Delete(MovieDTO obj)
         {
-            throw new NotImplementedException();
+            using(SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
+            {
+                conn.Open();
+                using(SqlCommand cmd = new SqlCommand("dbo.spMovie_Delete", conn))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@key", obj.Id);
+                    cmd.ExecuteNonQuery();
+                }
+                conn.Close();
+            }
         }
 
         public IEnumerable<MovieDTO> GetMovies(string searchString)
@@ -142,12 +168,51 @@ namespace FilmGrain.DAL.Concrete
 
         public MovieDTO Read(string key)
         {
-            throw new NotImplementedException();
+            MovieDTO movie = new MovieDTO();
+            using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand("dbo.spMovie_Read", conn))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Id", key);
+                    using (SqlDataReader datareader = cmd.ExecuteReader())
+                    {
+                        while (datareader.Read())
+                        {
+                            int Id = datareader.GetInt32(0);
+                            string Title = datareader.GetString(1);
+                            DateTime dateTime = datareader.GetDateTime(2);
+                            string director = datareader.GetString(3);
+                            decimal averageRating = datareader.GetDecimal(4);
+                            if (!datareader.IsDBNull(0))
+                            {
+                                movie.Id = Id;
+                                movie.Title = Title;
+                                movie.DateReleased = dateTime;
+                                movie.Director = director;
+                                movie.AverageRating = averageRating;
+                            }
+                        }
+                    }
+                    conn.Close();
+                }
+            }
+            return movie;
         }
-
         public void Update(MovieDTO obj)
         {
-            throw new NotImplementedException();
+            using(SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
+            {
+                conn.Open();
+                using(SqlCommand cmd = new SqlCommand("dbo.spMovie_Update", conn))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Rating", obj.AverageRating);
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+            }
         }
     }
 }

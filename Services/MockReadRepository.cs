@@ -18,7 +18,7 @@ namespace Services
             new MovieDTO{ Id = 5, Title = "Tremors", Director ="Ron Underwood", DateReleased = new DateTime(1990,9,8), AverageRating = 3.9m},
         };
 
-        public string Create(MovieDTO obj)
+        public void Create(MovieDTO obj)
         {
             throw new NotImplementedException();
         }

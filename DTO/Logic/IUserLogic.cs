@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using FilmGrain.DTO;
+using FilmGrain.Interfaces.DAL;
 
 namespace FilmGrain.Interfaces.Logic
 {
-    public interface IUserLogic
+    public interface IUserLogic : IUserContext
     {
         public void CreateAccount(UserDTO user);
         public UserDTO GetAccount(string username, string password);

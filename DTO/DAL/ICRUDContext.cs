@@ -6,7 +6,7 @@ namespace FilmGrain.Interfaces.DAL
 {
     public interface ICRUDContext<T>
     {
-        string Create(T obj);
+        void Create(T obj);
         T Read(string key);
         void Update(T obj);
         void Delete(T obj);
