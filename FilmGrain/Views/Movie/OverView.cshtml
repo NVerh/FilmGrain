@@ -5,8 +5,13 @@
 
 <h1>@Model.Title</h1>
 <body>
-    <header id="top_header">
-    </header>
+	<div>
+		<div class="return"><a href="@Url.Action("Index", "Home")">Return</a></div>
+		<h4>Movie Title: @Model.Title</h4>
+		<p class="">Release Date: @Model.ReleaseDate</p>
+		<p>Director: @Model.Director</p>
+		<p>User Rating: @Model.AverageRating</p>
+	</div>
 </body>
 
 

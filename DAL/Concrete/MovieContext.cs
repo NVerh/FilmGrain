@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Xml;
 
@@ -15,10 +17,10 @@ namespace FilmGrain.DAL.Concrete
     {
         public void Create(MovieDTO obj)
         {
-            using(SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
+            using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
             {
                 conn.Open();
-                using(SqlCommand cmd = new SqlCommand("dbo.spMovie_Create", conn))
+                using (SqlCommand cmd = new SqlCommand("dbo.spMovie_Create", conn))
                 {
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@Title", obj.Title);
@@ -27,64 +29,71 @@ namespace FilmGrain.DAL.Concrete
                     cmd.Parameters.AddWithValue("@Rating", obj.AverageRating);
                     cmd.Parameters.AddWithValue("@Genre", obj.Genre);
                     cmd.ExecuteNonQuery();
-
                 }
-                conn.Close();
+                conn.Dispose();
             }
         }
 
         public void Delete(MovieDTO obj)
         {
-            using(SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
+            using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
             {
                 conn.Open();
-                using(SqlCommand cmd = new SqlCommand("dbo.spMovie_Delete", conn))
+                using (SqlCommand cmd = new SqlCommand("dbo.spMovie_Delete", conn))
                 {
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@key", obj.Id);
                     cmd.ExecuteNonQuery();
                 }
-                conn.Close();
+                conn.Dispose();
             }
         }
 
         public IEnumerable<MovieDTO> GetMovies(string searchString)
         {
             List<MovieDTO> movies = new List<MovieDTO>();
-            using(SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
+            using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
             {
-                using(SqlCommand cmd = new SqlCommand("dbo.spMovie_GetMovies", conn))
+                try
                 {
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@Title", searchString);
-                    conn.Open();
-                    using(SqlDataReader datareader = cmd.ExecuteReader())
+                    using (SqlCommand cmd = new SqlCommand("dbo.spMovie_GetMovies", conn))
                     {
-                        while (datareader.Read())
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@Title", searchString);
+                        conn.Open();
+                        using (SqlDataReader datareader = cmd.ExecuteReader())
                         {
-                            int Id = datareader.GetInt32(0);
-                            string Title = datareader.GetString(1);
-                            DateTime dateTime = datareader.GetDateTime(2);
-                            string director = datareader.GetString(3);
-                            decimal averageRating = datareader.GetDecimal(4);
-                            if(!datareader.IsDBNull(0) && searchString == Title)
+                            while (datareader.Read())
                             {
-                                MovieDTO movie = new MovieDTO
+                                int Id = datareader.GetInt32(0);
+                                string Title = datareader.GetString(1);
+                                DateTime dateTime = datareader.GetDateTime(2);
+                                string director = datareader.GetString(3);
+                                decimal averageRating = datareader.GetDecimal(4);
+                                if (!datareader.IsDBNull(0) && searchString == Title)
                                 {
-                                    Id = Id,
-                                    Title = Title,
-                                    DateReleased = dateTime,
-                                    Director = director,
-                                    AverageRating = averageRating
-                                };
-                                movies.Add(movie);
+                                    MovieDTO movie = new MovieDTO
+                                    {
+                                        Id = Id,
+                                        Title = Title,
+                                        DateReleased = dateTime,
+                                        Director = director,
+                                        AverageRating = averageRating
+                                    };
+                                    movies.Add(movie);
+                                }
                             }
                         }
+
+                        conn.Dispose();
                     }
-                    conn.Dispose();
                 }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+                return movies;
             }
-            return movies;
         }
 
         public IEnumerable<MovieDTO> GetRandomMovies()
@@ -93,126 +102,135 @@ namespace FilmGrain.DAL.Concrete
             GenreDTO genre = new GenreDTO();
             using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
             {
-                using (SqlCommand cmd = new SqlCommand("dbo.spMovie_GetRandomMovies", conn))
+                try
                 {
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    conn.Open();
-                    using (SqlDataReader datareader = cmd.ExecuteReader())
+                    using (SqlCommand cmd = new SqlCommand("dbo.spMovie_GetRandomMovies", conn))
                     {
-                        while (datareader.Read())
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        conn.Open();
+                        using (SqlDataReader datareader = cmd.ExecuteReader())
                         {
-                            int Id = datareader.GetInt32(0);
-                            string Title = datareader.GetString(1);
-                            DateTime dateTime = datareader.GetDateTime(2);
-                            string director = datareader.GetString(3);
-                            decimal averageRating = datareader.GetDecimal(4);
-                            genre.Description = datareader.GetString(5);
-                            if (!datareader.IsDBNull(0) && !movies.Any(i => i.Id == Id))
+                            while (datareader.Read())
                             {
-                                MovieDTO movie = new MovieDTO
+                                int Id = datareader.GetInt32(0);
+                                string Title = datareader.GetString(1);
+                                DateTime dateTime = datareader.GetDateTime(2);
+                                string director = datareader.GetString(3);
+                                decimal averageRating = datareader.GetDecimal(4);
+                                genre.Description = datareader.GetString(5);
+                                if (!datareader.IsDBNull(0) && !movies.Any(i => i.Id == Id))
                                 {
-                                    Id = Id,
-                                    Title = Title,
-                                    DateReleased = dateTime,
-                                    Director = director,
-                                    AverageRating = averageRating,
-                                    Genre = new List<GenreDTO>
+                                    MovieDTO movie = new MovieDTO
                                     {
-                                        genre
-                                    }
-                                };
-                                movies.Add(movie);
+                                        Id = Id,
+                                        Title = Title,
+                                        DateReleased = dateTime,
+                                        Director = director,
+                                        AverageRating = averageRating,
+                                        Genre = genre
+                                    };
+                                    movies.Add(movie);
+                                }
                             }
                         }
+                        conn.Dispose();
                     }
-                    conn.Dispose();
                 }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+                return movies;
             }
-            return movies;
         }
         public IEnumerable<MoviePosterDTO> GetRandomPosters()
-        {
-            List<MoviePosterDTO> moviePosters = new List<MoviePosterDTO>();
-            using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
             {
-                using (SqlCommand cmd = new SqlCommand("dbo.spMovie_GetRandomMoviePosters", conn))
+                List<MoviePosterDTO> moviePosters = new List<MoviePosterDTO>();
+                using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
                 {
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    conn.Open();
-                    using (SqlDataReader datareader = cmd.ExecuteReader())
+                    using (SqlCommand cmd = new SqlCommand("dbo.spMovie_GetRandomMoviePosters", conn))
                     {
-                        while (datareader.Read())
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        conn.Open();
+                        using (SqlDataReader datareader = cmd.ExecuteReader())
                         {
-                            int id = datareader.GetInt32(0);
-                            string title = datareader.GetString(1);
-                            string posterUrl = datareader.GetString(2);
-                            if (!datareader.IsDBNull(0))
+                            while (datareader.Read())
                             {
-                                MoviePosterDTO poster = new MoviePosterDTO
+                                int id = datareader.GetInt32(0);
+                                string title = datareader.GetString(1);
+                                string posterUrl = datareader.GetString(2);
+                                if (!datareader.IsDBNull(0))
                                 {
-                                    Id = id,
-                                    Title = title,
-                                    PosterURL = posterUrl,
+                                    MoviePosterDTO poster = new MoviePosterDTO
+                                    {
+                                        Id = id,
+                                        Title = title,
+                                        PosterURL = posterUrl,
 
-                                };
-                                moviePosters.Add(poster);
+                                    };
+                                    moviePosters.Add(poster);
 
+                                }
                             }
                         }
+                        conn.Dispose();
                     }
-                    conn.Dispose();
                 }
+                return moviePosters;
             }
-            return moviePosters;
-        }
 
-        public MovieDTO Read(string key)
-        {
-            MovieDTO movie = new MovieDTO();
-            using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
+            public MovieDTO Read(int key)
             {
-                conn.Open();
-                using (SqlCommand cmd = new SqlCommand("dbo.spMovie_Read", conn))
+                MovieDTO movie = new MovieDTO();
+                GenreDTO genre = new GenreDTO();
+                using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
                 {
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@Id", key);
-                    using (SqlDataReader datareader = cmd.ExecuteReader())
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand("dbo.spMovie_Read", conn))
                     {
-                        while (datareader.Read())
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@Id", key);
+                        using (SqlDataReader datareader = cmd.ExecuteReader())
                         {
-                            int Id = datareader.GetInt32(0);
-                            string Title = datareader.GetString(1);
-                            DateTime dateTime = datareader.GetDateTime(2);
-                            string director = datareader.GetString(3);
-                            decimal averageRating = datareader.GetDecimal(4);
-                            if (!datareader.IsDBNull(0))
+                            while (datareader.Read())
                             {
-                                movie.Id = Id;
-                                movie.Title = Title;
-                                movie.DateReleased = dateTime;
-                                movie.Director = director;
-                                movie.AverageRating = averageRating;
+                                int Id = datareader.GetInt32(0);
+                                string Title = datareader.GetString(1);
+                                DateTime dateTime = datareader.GetDateTime(2);
+                                string director = datareader.GetString(3);
+                                decimal averageRating = datareader.GetDecimal(4);
+                                genre.Description = datareader.GetString(5);
+                                string movieUrl = datareader.GetString(6);
+                                if (!datareader.IsDBNull(0))
+                                {
+                                    movie.Id = Id;
+                                    movie.Title = Title;
+                                    movie.DateReleased = dateTime;
+                                    movie.Director = director;
+                                    movie.AverageRating = averageRating;
+                                    movie.Genre = genre;
+                                    movie.PosterURL = movieUrl;                                    
+                                }
                             }
                         }
+                        conn.Dispose();
                     }
-                    conn.Close();
                 }
+                return movie;
             }
-            return movie;
-        }
-        public void Update(MovieDTO obj)
-        {
-            using(SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
+            public void Update(MovieDTO obj)
             {
-                conn.Open();
-                using(SqlCommand cmd = new SqlCommand("dbo.spMovie_Update", conn))
+                using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
                 {
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@Rating", obj.AverageRating);
-                    cmd.ExecuteNonQuery();
-                    conn.Close();
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand("dbo.spMovie_Update", conn))
+                    {
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@Rating", obj.AverageRating);
+                        cmd.ExecuteNonQuery();
+                        conn.Dispose();
+                    }
                 }
             }
         }
     }
-}

@@ -34,7 +34,6 @@ namespace FilmGrain.Controllers
             }
             return View();
         }
-        [HttpGet]
         public IActionResult Overview(MovieViewModel movie)
         {
             return View(movie);

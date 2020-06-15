@@ -39,7 +39,7 @@ namespace Services
             throw new NotImplementedException();
         }
 
-        public UserDTO Read(string key)
+        public UserDTO Read(int key)
         {
             throw new NotImplementedException();
         }

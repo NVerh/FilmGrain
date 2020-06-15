@@ -45,5 +45,25 @@ namespace FilmGrain.Logic
         {
             return _context.GetRandomPosters();
         }
+
+        public void Create(MovieDTO obj)
+        {
+            _context.Create(obj);
+        }
+
+        public MovieDTO Read(int key)
+        {
+            return _context.Read(key);
+        }
+
+        public void Update(MovieDTO obj)
+        {
+            _context.Update(obj);
+        }
+
+        public void Delete(MovieDTO obj)
+        {
+            _context.Delete(obj);
+        }
     }
 }

@@ -133,7 +133,7 @@ namespace DAL.Concrete
             }
         }
 
-        public UserDTO Read(string key)
+        public UserDTO Read(int key)
         {
             UserDTO user = new UserDTO();
             using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))

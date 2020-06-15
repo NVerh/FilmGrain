@@ -19,7 +19,7 @@ namespace FilmGrain.Logic
 
         public void AddAccountToDB(UserDTO user)
         {
-            throw new NotImplementedException();
+            _userContext.AddAccountToDB(user);
         }
 
         public void Create(UserDTO obj)
@@ -35,7 +35,7 @@ namespace FilmGrain.Logic
 
         public void Delete(UserDTO obj)
         {
-            throw new NotImplementedException();
+            _userContext.Delete(obj);
         }
 
         public UserDTO GetAccount(string username, string password)
@@ -49,12 +49,12 @@ namespace FilmGrain.Logic
 
         public UserDTO GetAccountFromDB(string username, string password)
         {
-            throw new NotImplementedException();
+            return _userContext.GetAccountFromDB(username, password);
         }
 
         public string GetAccountName(string username)
         {
-            throw new NotImplementedException();
+            return _userContext.GetAccountName(username);
         }
 
         public bool Login(UserDTO user)
@@ -62,7 +62,7 @@ namespace FilmGrain.Logic
             throw new NotImplementedException();
         }
 
-        public UserDTO Read(string key)
+        public UserDTO Read(int key)
         {
             return _userContext.Read(key);
         }

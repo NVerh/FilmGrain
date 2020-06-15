@@ -47,7 +47,6 @@ namespace FilmGrain
             services.AddHttpContextAccessor();
             services.AddScoped<PasswordSalt>();
             services.AddScoped<PasswordHash>();
-            services.AddScoped<LoginRepository>();
             services.AddScoped<IUserContext, UserContext>();
             services.AddScoped<IUserLogic, UserLogic>();
             services.AddScoped<IMovieContext, MovieContext>();

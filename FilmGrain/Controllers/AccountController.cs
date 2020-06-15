@@ -37,17 +37,10 @@ namespace FilmGrain.Controllers
         }
         [HttpPost]
         public IActionResult Register(RegisterViewModel model)
-        {
-            try
-            {
+        { 
                 _userLogic.CreateAccount(_mapper.Map<UserDTO>(model));
                 ViewData["Message"] = "Account Created!";
                 return RedirectToAction("Login");
-            }
-            catch(Exception e)
-            {
-                return View(e);
-            }
         }
         [HttpGet]
         public IActionResult Login(string returnUrl = "")

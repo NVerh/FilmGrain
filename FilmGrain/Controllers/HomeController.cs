@@ -51,9 +51,11 @@ namespace FilmGrain.Controllers
             }
             return View();
         }
-        public IActionResult GoToOverview(MovieViewModel movie)
+        public IActionResult GoToOverview(int id)
         {
-            return RedirectToAction("Overview", "Movie");
+            MovieViewModel movie = new MovieViewModel();
+            movie = _mapper.Map<MovieViewModel>(_movie.Read(id));
+            return RedirectToAction("Overview", "Movie", movie);
         }
     }
 }

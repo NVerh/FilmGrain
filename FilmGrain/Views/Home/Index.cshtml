@@ -6,16 +6,16 @@
 <div id="content" class="site-body">
     <div class="content-wrap">
         <h1 class="title-user">
-            " Welcome to FilmGrain!"
-            <span class="mob-hide">Here are some recommend movies for you!</span>
+            "Welcome to FilmGrain!"
         </h1>
 		<section id="random-movies" class="section">
 			<ul class="list-group list-group-horizontal">
+				var a;
 			@foreach (var Movie in Model.RandomMoviePosters)
 			{
 				<li class="list-group-item">
-						<h5><a asp-action="GoToOverview">@Movie.Title</a> </h5>
-						<img src="@Movie.Url"/>
+						<h5><a asp-controller="Home" asp-action="GoToOverview" asp-route-id="@Movie.Id">@Movie.Title</a> </h5>
+						<img src="@Movie.PosterUrl" class="rounded float-left" class="img-fluid" alt="Responsive image"/>
 				</li>
 			}
 			</ul>

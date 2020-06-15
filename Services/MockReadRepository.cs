@@ -49,7 +49,7 @@ namespace Services
             throw new NotImplementedException();
         }
 
-        public MovieDTO Read(string key)
+        public MovieDTO Read(int key)
         {
             throw new NotImplementedException();
         }
