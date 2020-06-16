@@ -1,24 +1,29 @@
 ﻿@model IndexViewModel 
 @{
     ViewData["Title"] = "Home Page";
+	Layout = "_Layout";
 }
 
-<div id="content" class="site-body">
-    <div class="content-wrap">
-        <h1 class="title-user">
-            "Welcome to FilmGrain!"
-        </h1>
-		<section id="random-movies" class="section">
-			<ul class="list-group list-group-horizontal">
-				var a;
-			@foreach (var Movie in Model.RandomMoviePosters)
-			{
-				<li class="list-group-item">
-						<h5><a asp-controller="Home" asp-action="GoToOverview" asp-route-id="@Movie.Id">@Movie.Title</a> </h5>
-						<img src="@Movie.PosterUrl" class="rounded float-left" class="img-fluid" alt="Responsive image"/>
-				</li>
-			}
-			</ul>
-		</section>
-    </div>
+	<div id="content" class="site-body">
+		<div class="content-wrap">
+			<h1 class="title-user">
+				"Welcome to FilmGrain!"
+			</h1>
+			<form class="form-inline d-flex justify-content-center form-control-sm mt-0">
+				<i class="fas fa-sea"></i>
+			</form>
+			<section id="random-movies" class="section">
+				<ul class="list-group list-group-horizontal">
+					@foreach (var Movie in Model.RandomMoviePosters)
+					{
+						<li class="list-group-item">
+							<h5><a asp-controller="Home" asp-action="GoToOverview" asp-route-id="@Movie.Id">@Movie.Title</a> </h5>
+							<div id="posterContainer" class="w-50 p-3">
+							<img src="@Movie.PosterUrl" class="posterContainer" alt="Responsive image" />
+							</div>
+						</li>
+					}
+				</ul>
+			</section>
+	</div>
 </div>
