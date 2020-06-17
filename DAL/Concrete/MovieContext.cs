@@ -19,18 +19,28 @@ namespace FilmGrain.DAL.Concrete
         {
             using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
             {
-                conn.Open();
-                using (SqlCommand cmd = new SqlCommand("dbo.spMovie_Create", conn))
+                try
                 {
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@Title", obj.Title);
-                    cmd.Parameters.AddWithValue("@ReleaseDate", obj.DateReleased);
-                    cmd.Parameters.AddWithValue("@Director", obj.Director);
-                    cmd.Parameters.AddWithValue("@Rating", obj.AverageRating);
-                    cmd.Parameters.AddWithValue("@Genre", obj.Genre);
-                    cmd.ExecuteNonQuery();
+
+
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand("dbo.spMovie_Create", conn))
+                    {
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@Title", obj.Title);
+                        cmd.Parameters.AddWithValue("@ReleaseDate", obj.DateReleased);
+                        cmd.Parameters.AddWithValue("@Director", obj.Director);
+                        cmd.Parameters.AddWithValue("@Rating", obj.AverageRating);
+                        cmd.Parameters.AddWithValue("@Genre", obj.Genre);
+                        cmd.ExecuteNonQuery();
+                    }
+                    conn.Dispose();
                 }
-                conn.Dispose();
+                catch (SqlException exv)
+                {
+                    Console.WriteLine(exv);
+                    throw new ArgumentException("Database error; cannot create Movie.");
+                }
             }
         }
 
@@ -38,14 +48,22 @@ namespace FilmGrain.DAL.Concrete
         {
             using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
             {
-                conn.Open();
-                using (SqlCommand cmd = new SqlCommand("dbo.spMovie_Delete", conn))
+                try
                 {
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@key", obj.Id);
-                    cmd.ExecuteNonQuery();
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand("dbo.spMovie_Delete", conn))
+                    {
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@key", obj.Id);
+                        cmd.ExecuteNonQuery();
+                    }
+                    conn.Dispose();
                 }
-                conn.Dispose();
+                catch (SqlException ex)
+                {
+                    Console.WriteLine(ex);
+                    throw new ArgumentException("Database error; cannot delete Movie.");
+                }
             }
         }
 
@@ -88,9 +106,10 @@ namespace FilmGrain.DAL.Concrete
                         conn.Dispose();
                     }
                 }
-                catch (Exception e)
+                catch (SqlException ex)
                 {
-                    throw e;
+                    Console.WriteLine(ex);
+                    throw new ArgumentException("Database error; cannot get Movies");
                 }
                 return movies;
             }
@@ -136,17 +155,20 @@ namespace FilmGrain.DAL.Concrete
                         conn.Dispose();
                     }
                 }
-                catch (Exception e)
+                catch (SqlException ex)
                 {
-                    throw e;
+                    Console.WriteLine(ex);
+                    throw new ArgumentException("Database error; cannot get random movies");
                 }
                 return movies;
             }
         }
         public IEnumerable<MoviePosterDTO> GetRandomPosters()
+        {
+            List<MoviePosterDTO> moviePosters = new List<MoviePosterDTO>();
+            using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
             {
-                List<MoviePosterDTO> moviePosters = new List<MoviePosterDTO>();
-                using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
+                try
                 {
                     using (SqlCommand cmd = new SqlCommand("dbo.spMovie_GetRandomMoviePosters", conn))
                     {
@@ -176,14 +198,22 @@ namespace FilmGrain.DAL.Concrete
                         conn.Dispose();
                     }
                 }
-                return moviePosters;
+                catch (SqlException ex)
+                {
+                    Console.WriteLine(ex);
+                    throw new ArgumentException("Database error; cannot get random Posters");
+                }
             }
+            return moviePosters;
+        }
 
-            public MovieDTO Read(int key)
+        public MovieDTO Read(int key)
+        {
+            MovieDTO movie = new MovieDTO();
+            GenreDTO genre = new GenreDTO();
+            using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
             {
-                MovieDTO movie = new MovieDTO();
-                GenreDTO genre = new GenreDTO();
-                using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
+                try
                 {
                     conn.Open();
                     using (SqlCommand cmd = new SqlCommand("dbo.spMovie_Read", conn))
@@ -209,26 +239,41 @@ namespace FilmGrain.DAL.Concrete
                                     movie.Director = director;
                                     movie.AverageRating = averageRating;
                                     movie.Genre = genre;
-                                    movie.PosterURL = movieUrl;                                    
+                                    movie.PosterURL = movieUrl;
                                 }
                             }
                         }
                         conn.Dispose();
                     }
                 }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine(ex);
+                    throw new ArgumentException("Database error; cannot read Movies");
+                }
                 return movie;
             }
+        }
+
             public void Update(MovieDTO obj)
             {
                 using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
                 {
-                    conn.Open();
-                    using (SqlCommand cmd = new SqlCommand("dbo.spMovie_Update", conn))
+                    try
                     {
-                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@Rating", obj.AverageRating);
-                        cmd.ExecuteNonQuery();
-                        conn.Dispose();
+                        conn.Open();
+                        using (SqlCommand cmd = new SqlCommand("dbo.spMovie_Update", conn))
+                        {
+                            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@Rating", obj.AverageRating);
+                            cmd.ExecuteNonQuery();
+                            conn.Dispose();
+                        }
+                    }
+                    catch (SqlException ex)
+                    {
+                        Console.WriteLine(ex);
+                        throw new ArgumentException("Database error; cannot update Movies");
                     }
                 }
             }

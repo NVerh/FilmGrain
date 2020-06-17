@@ -37,10 +37,17 @@ namespace FilmGrain.Controllers
         }
         [HttpPost]
         public IActionResult Register(RegisterViewModel model)
-        { 
+        {
+            try
+            {
                 _userLogic.CreateAccount(_mapper.Map<UserDTO>(model));
                 ViewData["Message"] = "Account Created!";
                 return RedirectToAction("Login");
+            }
+            catch(ApplicationException ex)
+            {
+                return RedirectToAction("Register", "Error");
+            }
         }
         [HttpGet]
         public IActionResult Login(string returnUrl = "")
@@ -60,9 +67,9 @@ namespace FilmGrain.Controllers
                     return RedirectToAction("Index", "Home");
                 }
             }
-            catch
+            catch(ApplicationException ex)
             {
-                return View(ModelState.Values.SelectMany(v => v.Errors).ElementAt(0));
+                return RedirectToAction("Login", "Error", ex);
             }
             return View();
         }

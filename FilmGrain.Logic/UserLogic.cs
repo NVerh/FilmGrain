@@ -71,5 +71,23 @@ namespace FilmGrain.Logic
         {
             _userContext.Update(obj);
         }
+        public bool VerifyByEmail(string email)
+        {
+            try
+            {
+                if (_userContext.GetAccountByEmail(email) != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }
