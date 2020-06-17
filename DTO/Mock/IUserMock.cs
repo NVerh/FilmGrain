@@ -6,7 +6,7 @@ using System.Text;
 
 namespace FilmGrain.Interfaces.Mock
 {
-    public interface IUserMock : IUserLogic, IUserDAL
+    public interface IUserMock : IUserLogic, IUserContext
     {
     }
 }

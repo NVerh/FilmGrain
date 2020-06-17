@@ -38,36 +38,33 @@ namespace FilmGrain.Controllers
         [HttpPost]
         public IActionResult Register(RegisterViewModel model)
         {
-            AccountViewModel account = new AccountViewModel();
             try
             {
                 _userLogic.CreateAccount(_mapper.Map<UserDTO>(model));
                 ViewData["Message"] = "Account Created!";
-                account = _mapper.Map<AccountViewModel>(model);
-                
                 return RedirectToAction("Login");
             }
             catch(ApplicationException ex)
             {
-                return RedirectToAction("Register", "Error", ex);
+                return RedirectToAction("Register", "Error");
             }
         }
-        public IActionResult Login()
+        [HttpGet]
+        public IActionResult Login(string returnUrl = "")
         {
-            return View();
+            var model = new LoginViewModel { ReturnUrl = returnUrl };
+            return View(model);
         }
         [HttpPost]
         public IActionResult Login(LoginViewModel model)
         {
-            AccountViewModel account = new AccountViewModel();
             try
             {
                 var user = _userLogic.GetAccountByEmail(model.Email);
                 if (user != null)
                 {
                     _loginRepo.SetLoginSession(user.UserName, user.Id);
-                    account = _mapper.Map<AccountViewModel>(user);
-                    return RedirectToAction("Index", "Home", account);
+                    return RedirectToAction("Index", "Home");
                 }
             }
             catch(ApplicationException ex)
