@@ -46,7 +46,7 @@ namespace FilmGrain.Controllers
             }
             catch(ApplicationException ex)
             {
-                return RedirectToAction("Register", "Error");
+                return RedirectToAction("Register", "Error", ex);
             }
         }
         [HttpGet]

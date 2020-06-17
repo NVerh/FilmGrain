@@ -33,11 +33,6 @@ namespace FilmGrain.Controllers
 
         public IActionResult Index(IndexViewModel index, AccountViewModel account)
         {
-            if(_login.GetUsername() != null)
-            {
-                index.Account = account;
-                index.Account.Profile = 
-            }
             index.RandomMoviePosters = _mapper.Map<IEnumerable<MoviePosterDTO>, List<MoviePosterViewModel>>(_movie.GetRandomPosters());
             return View(index);
         }
