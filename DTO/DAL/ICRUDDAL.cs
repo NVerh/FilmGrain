@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FilmGrain.Interfaces.DAL
 {
-    public interface ICRUDContext<T>
+    public interface ICRUDDAL<T>
     {
         void Create(T obj);
         T Read(int key);

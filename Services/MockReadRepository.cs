@@ -3,11 +3,12 @@ using FilmGrain.Interfaces.DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace Services
 {
-    public class MockReadRepository : IMovieContext, IReadRepository
+    public class MockReadRepository : IMovieDAL, IReadRepository
     {
         List<MovieDTO> _movies = new List<MovieDTO>
         {
@@ -17,15 +18,21 @@ namespace Services
             new MovieDTO{ Id = 4, Title = "Bright", Director = "David Ayer", DateReleased = new DateTime(2017,12,13), AverageRating = 3.2m},
             new MovieDTO{ Id = 5, Title = "Tremors", Director ="Ron Underwood", DateReleased = new DateTime(1990,9,8), AverageRating = 3.9m},
         };
+        List<MoviePosterDTO> _posters = new List<MoviePosterDTO>
+        {
+            new MoviePosterDTO{ Id = 1, Title ="Gone With The Wind", PosterURL ="https://theposterdb.com/api/assets/43275"},
+            new MoviePosterDTO{ Id = 2, Title ="The Invisible Man", PosterURL ="https://theposterdb.com/api/assets/17829"},
+            new MoviePosterDTO{ Id = 3, Title ="Bright", PosterURL="https://theposterdb.com/api/assets/75203"}
+        };
 
         public void Create(MovieDTO obj)
         {
-            throw new NotImplementedException();
+            _movies.Add(obj);
         }
 
         public void Delete(MovieDTO obj)
         {
-            throw new NotImplementedException();
+            var movies = _movies.RemoveAll(x => x.Id == obj.Id);
         }
 
         public IEnumerable<MovieDTO> GetMovies(int Id)
@@ -41,17 +48,24 @@ namespace Services
 
         public IEnumerable<MovieDTO> GetRandomMovies()
         {
-            throw new NotImplementedException();
+            Random r = new Random();
+            int toSkip = r.Next(0, _movies.Count);
+            var movies = _movies.Skip(toSkip).Take(3);
+            return movies;
         }
 
         public IEnumerable<MoviePosterDTO> GetRandomPosters()
         {
-            throw new NotImplementedException();
+            Random r = new Random();
+            int toSkip = r.Next(0, _movies.Count);
+            var posters = _posters.Skip(toSkip).Take(3);
+            return posters;
         }
 
         public MovieDTO Read(int key)
         {
-            throw new NotImplementedException();
+            var movie = _movies.Single(x => x.Id == key);
+            return movie;
         }
 
         public void Update(MovieDTO obj)

@@ -94,13 +94,6 @@ body {
     max-width: 500px;
 }
 
-h1 {
-    font-family: 'Lobster';
-    font-size: 6rem;
-    color: black;
-    transform: rotate(-10deg);
-}
-
 .alert {
     margin-top: 10px;
 }
@@ -110,7 +103,6 @@ h1 {
     align-items: flex-start;
     justify-content: center;
     background: rgba(255, 255, 255, 0.2);
-    min-height: 100vh;
     overflow: hidden;
 }
 
@@ -129,17 +121,6 @@ button {
     font-family: 'Lobster';
 }
 
-input[type=text] {
-    background: rgba(255, 255, 255, 0.5);
-    outline: none;
-    border: 3px solid black;
-    color: black;
-    font-family: 'Lato';
-    font-size: 2em;
-    padding: 8px;
-    margin-right: 0;
-    text-align: center;
-}
 
 
 ::-webkit-input-placeholder {
@@ -180,8 +161,21 @@ input:focus {
     color: white;
 }
 .posterContainer {
-    max-width: 200px;
-    max-height: 100px;
+    max-width: 400px;
+    max-height: 200px;
+}
+#posterContainer {
+    align-items: center;
+}
+.posterOverview {
+    max-height: 1200px;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+
+}
+.ImagePos {
+    position: relative;
 }
 
 

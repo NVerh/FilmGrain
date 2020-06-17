@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FilmGrain.Interfaces.DAL
 {
-    public interface IMovieContext : ICRUDContext<MovieDTO>
+    public interface IMovieDAL : ICRUDDAL<MovieDTO>
     {
         public IEnumerable<MovieDTO> GetMovies(string searchString);
         public IEnumerable<MovieDTO> GetRandomMovies();

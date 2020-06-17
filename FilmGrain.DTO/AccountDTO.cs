@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace FilmGrain.Models.User
+namespace FilmGrain.DTO
 {
-    public class AccountViewModel
+    public class AccountDTO
     {
         public int Id { get; set; }
         public string Username { get; set; }

@@ -6,7 +6,7 @@ using FilmGrain.DTO;
 
 namespace FilmGrain.Interfaces.DAL
 {
-    public interface IUserContext : ICRUDContext<UserDTO>
+    public interface IUserDAL : ICRUDDAL<UserDTO>
     {
         void AddAccountToDB(UserDTO user);
         UserDTO GetAccountFromDB(string username, string password);

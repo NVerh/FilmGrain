@@ -10,28 +10,37 @@ using FilmGrain.Interfaces.Logic;
 using AutoMapper;
 using FilmGrain.Models.Movie;
 using FilmGrain.DTO;
+using FilmGrain.Models.User;
+using FilmGrain.Repositories;
+using Microsoft.AspNetCore.Http;
 
 namespace FilmGrain.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly IMovieLogic _movie;
+        private readonly IAccountLogic _account;
         private readonly IMapper _mapper;
+        private readonly LoginRepository _login;
 
-        public HomeController(ILogger<HomeController> logger, IMovieLogic movie, IMapper mapper)
+        public HomeController(IMovieLogic movie, IMapper mapper, LoginRepository login, IAccountLogic account)
         {
-            _logger = logger;
             _movie = movie;
             _mapper = mapper;
+            _login = login;
+            _account = account;
         }
 
-        public IActionResult Index(IndexViewModel index)
+        public IActionResult Index(IndexViewModel index, AccountViewModel account)
         {
+            if(_login.GetUsername() != null)
+            {
+                index.Account = account;
+                index.Account.Profile = 
+            }
             index.RandomMoviePosters = _mapper.Map<IEnumerable<MoviePosterDTO>, List<MoviePosterViewModel>>(_movie.GetRandomPosters());
             return View(index);
         }
-
         public IActionResult Privacy()
         {
             return View();

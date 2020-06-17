@@ -6,7 +6,7 @@ using FilmGrain.DTO;
 
 namespace FilmGrain.Interfaces.Logic
 {
-    public interface IMovieLogic : IMovieContext
+    public interface IMovieLogic : IMovieDAL
     {
         public IEnumerable<MovieDTO> GetMovies(string searchString);
         public IEnumerable<MovieDTO> GetRandomMovies();

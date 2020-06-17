@@ -15,9 +15,11 @@ namespace FilmGrain.Mapping
         public MappingProfile()
         {
             CreateMap<UserDTO, RegisterViewModel>().ReverseMap();
+            CreateMap<UserDTO, AccountViewModel>().ReverseMap();
             CreateMap<MovieDTO, MovieViewModel>().ReverseMap();
             CreateMap<MoviePosterDTO, MoviePosterViewModel>().ReverseMap();
             CreateMap<GenreDTO, GenreViewModel>().ReverseMap();
+            CreateMap<AccountViewModel, RegisterViewModel>().ReverseMap();
         }
     }
 }

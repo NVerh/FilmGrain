@@ -7,11 +7,13 @@
 <body>
 	<div>
 		<div class="return"><a href="@Url.Action("Index", "Home")">Return</a></div>
-		<h4>Movie Title: @Model.Title</h4>
-		<p class="">Release Date: @Model.ReleaseDate</p>
-		<p>Director: @Model.Director</p>
-		<p>User Rating: @Model.AverageRating</p>
+		<p><strong>Release Date:</strong> @Model.DateReleased</p>
+		<p><strong>Director:</strong> @Model.Director</p>
+	<p><strong>User Rating:</strong> @Model.AverageRating</p>
 	</div>
+
+		<img src="@Model.PosterUrl" class="rounded float-left" />
+	<input type="button" value="Add to Favorites" class="btn btn-primary" asp-action="AddFavorite" asp-controller="Profile" asp-route-id="@Model.Id" />
 </body>
 
 

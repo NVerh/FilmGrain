@@ -6,7 +6,7 @@ using FilmGrain.Interfaces.DAL;
 
 namespace FilmGrain.Interfaces.Logic
 {
-    public interface IUserLogic : IUserContext
+    public interface IUserLogic : IUserDAL
     {
         public void CreateAccount(UserDTO user);
         public UserDTO GetAccount(string username, string password);

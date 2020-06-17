@@ -10,9 +10,9 @@ namespace FilmGrain.Logic
 {
     public class UserLogic : IUserLogic
     {
-        private readonly IUserContext _userContext;
+        private readonly IUserDAL _userContext;
 
-        public UserLogic(IUserContext userContext)
+        public UserLogic(IUserDAL userContext)
         {
             _userContext = userContext;
         }
@@ -70,6 +70,24 @@ namespace FilmGrain.Logic
         public void Update(UserDTO obj)
         {
             _userContext.Update(obj);
+        }
+        public bool VerifyByEmail(string email)
+        {
+            try
+            {
+                if (_userContext.GetAccountByEmail(email) != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

@@ -47,10 +47,11 @@ namespace FilmGrain
             services.AddHttpContextAccessor();
             services.AddScoped<PasswordSalt>();
             services.AddScoped<PasswordHash>();
-            services.AddScoped<IUserContext, UserContext>();
+            services.AddScoped<IUserDAL, UserContext>();
             services.AddScoped<IUserLogic, UserLogic>();
-            services.AddScoped<IMovieContext, MovieContext>();
+            services.AddScoped<IMovieDAL, MovieContext>();
             services.AddScoped<IMovieLogic, MovieLogic>();
+            services.AddScoped<LoginRepository>();
             services.AddAutoMapper(typeof(MappingBootstrapper));
             DBAccess._connectionstring = (Configuration.GetConnectionString("DefaultConnection"));            
         }

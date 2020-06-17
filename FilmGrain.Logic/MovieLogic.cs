@@ -11,8 +11,8 @@ namespace FilmGrain.Logic
 {
     public class MovieLogic : IMovieLogic
     {
-        private readonly IMovieContext _context;
-        public MovieLogic(IMovieContext context)
+        private readonly IMovieDAL _context;
+        public MovieLogic(IMovieDAL context)
         {
             _context = context;
         }
