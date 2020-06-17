@@ -6,23 +6,36 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using FilmGrain.Models;
+using FilmGrain.Interfaces.Logic;
+using AutoMapper;
+using FilmGrain.Models.Movie;
+using FilmGrain.DTO;
+using FilmGrain.Models.User;
+using FilmGrain.Repositories;
+using Microsoft.AspNetCore.Http;
 
 namespace FilmGrain.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IMovieLogic _movie;
+        private readonly IAccountLogic _account;
+        private readonly IMapper _mapper;
+        private readonly LoginRepository _login;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IMovieLogic movie, IMapper mapper, LoginRepository login, IAccountLogic account)
         {
-            _logger = logger;
+            _movie = movie;
+            _mapper = mapper;
+            _login = login;
+            _account = account;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(IndexViewModel index, AccountViewModel account)
         {
-            return View();
+            index.RandomMoviePosters = _mapper.Map<IEnumerable<MoviePosterDTO>, List<MoviePosterViewModel>>(_movie.GetRandomPosters());
+            return View(index);
         }
-
         public IActionResult Privacy()
         {
             return View();
@@ -32,6 +45,21 @@ namespace FilmGrain.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        [HttpGet]
+        public IActionResult GetMovies(string searchText)
+        {
+            if(!ModelState.IsValid)
+            {
+                var Films =_movie.GetMovies(searchText);
+            }
+            return View();
+        }
+        public IActionResult GoToOverview(int id)
+        {
+            MovieViewModel movie = new MovieViewModel();
+            movie = _mapper.Map<MovieViewModel>(_movie.Read(id));
+            return RedirectToAction("Overview", "Movie", movie);
         }
     }
 }

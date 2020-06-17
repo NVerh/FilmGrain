@@ -10,6 +10,16 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Identity;
 using FilmGrain.Models;
+using Services;
+using FilmGrain.Mapping;
+using AutoMapper;
+using FilmGrain.Repositories;
+using FilmGrain.Logic;
+using FilmGrain.Interfaces.DAL;
+using FilmGrain.Interfaces.Logic;
+using DAL.Access;
+using FilmGrain.DAL.Concrete;
+using DAL.Concrete;
 
 namespace FilmGrain
 {
@@ -24,8 +34,26 @@ namespace FilmGrain
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
+        {          
             services.AddControllersWithViews();
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(60);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            }
+            );
+            services.AddHttpContextAccessor();
+            services.AddScoped<PasswordSalt>();
+            services.AddScoped<PasswordHash>();
+            services.AddScoped<IUserDAL, UserContext>();
+            services.AddScoped<IUserLogic, UserLogic>();
+            services.AddScoped<IMovieDAL, MovieContext>();
+            services.AddScoped<IMovieLogic, MovieLogic>();
+            services.AddScoped<LoginRepository>();
+            services.AddAutoMapper(typeof(MappingBootstrapper));
+            DBAccess._connectionstring = (Configuration.GetConnectionString("DefaultConnection"));            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +73,7 @@ namespace FilmGrain
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession();
             app.UseAuthentication();
 
             app.UseAuthorization();

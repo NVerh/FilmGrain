@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DTO
+namespace FilmGrain.DTO
 {
     public class RatingDTO
     {
         public int Id { get; set; }
-        public decimal Value { get; set; }
+        public int Value { get; set; }
     }
 }

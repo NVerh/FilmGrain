@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DTO
+namespace FilmGrain.DTO
 {
     public class ReviewDTO
     {
         public int Id { get; set; }
-        public FilmDTO ReviewedFilm { get; set; }
-        public RatingDTO FilmRating { get; set; }
+        public MovieDTO ReviewedMovie{ get; set; }
+        public RatingDTO MovieRating { get; set; }
     }
 }

@@ -3,9 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29926.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilmGrain", "FilmGrain\FilmGrain.csproj", "{AA80B71D-7D11-4E54-8229-C62DDDDA3683}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmGrain", "FilmGrain\FilmGrain.csproj", "{AA80B71D-7D11-4E54-8229-C62DDDDA3683}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTO", "DTO\DTO.csproj", "{7D30B1BA-EC9B-4177-BE69-AF9ECFD368BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmGrain.Interfaces", "DTO\FilmGrain.Interfaces.csproj", "{7D30B1BA-EC9B-4177-BE69-AF9ECFD368BE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmGrain.DAL", "DAL\FilmGrain.DAL.csproj", "{5BA86739-6D61-49AE-9403-D0A20CA266C2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{916059E7-79C4-4EFD-9A16-6B5D314E0324}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmGrain.Tests", "FilmGrain.Tests\FilmGrain.Tests.csproj", "{CFD68320-994D-4824-ACFF-1B0CF795D45A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmGrain.Logic", "FilmGrain.Logic\FilmGrain.Logic.csproj", "{4417AA36-0F88-413B-89A2-90182D5D3BA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilmGrain.DTO", "FilmGrain.DTO\FilmGrain.DTO.csproj", "{31AF6C5D-61CD-46A2-912C-5D51A259DB00}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +31,26 @@ Global
 		{7D30B1BA-EC9B-4177-BE69-AF9ECFD368BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D30B1BA-EC9B-4177-BE69-AF9ECFD368BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D30B1BA-EC9B-4177-BE69-AF9ECFD368BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BA86739-6D61-49AE-9403-D0A20CA266C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BA86739-6D61-49AE-9403-D0A20CA266C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BA86739-6D61-49AE-9403-D0A20CA266C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BA86739-6D61-49AE-9403-D0A20CA266C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{916059E7-79C4-4EFD-9A16-6B5D314E0324}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{916059E7-79C4-4EFD-9A16-6B5D314E0324}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{916059E7-79C4-4EFD-9A16-6B5D314E0324}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{916059E7-79C4-4EFD-9A16-6B5D314E0324}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFD68320-994D-4824-ACFF-1B0CF795D45A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFD68320-994D-4824-ACFF-1B0CF795D45A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFD68320-994D-4824-ACFF-1B0CF795D45A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFD68320-994D-4824-ACFF-1B0CF795D45A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4417AA36-0F88-413B-89A2-90182D5D3BA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4417AA36-0F88-413B-89A2-90182D5D3BA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4417AA36-0F88-413B-89A2-90182D5D3BA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4417AA36-0F88-413B-89A2-90182D5D3BA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31AF6C5D-61CD-46A2-912C-5D51A259DB00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31AF6C5D-61CD-46A2-912C-5D51A259DB00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31AF6C5D-61CD-46A2-912C-5D51A259DB00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31AF6C5D-61CD-46A2-912C-5D51A259DB00}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
