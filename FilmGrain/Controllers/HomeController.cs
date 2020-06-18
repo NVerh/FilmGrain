@@ -21,18 +21,29 @@ namespace FilmGrain.Controllers
         private readonly IMovieLogic _movie;
         private readonly IMapper _mapper;
         private readonly LoginRepository _login;
+        private readonly IPosterLogic _poster;
 
-        public HomeController(IMovieLogic movie, IMapper mapper, LoginRepository login)
+        public HomeController(IMovieLogic movie, IMapper mapper, LoginRepository login, IPosterLogic poster)
         {
             _movie = movie;
             _mapper = mapper;
             _login = login;
+            _poster = poster;
         }
 
         public IActionResult Index(IndexViewModel index, AccountViewModel account)
         {
-            index.RandomMoviePosters = _mapper.Map<IEnumerable<MoviePosterDTO>, List<MoviePosterViewModel>>(_movie.GetRandomPosters());
-            return View(index);
+            try
+            {
+                index.RandomMoviePosters = _mapper.Map<IEnumerable<MoviePosterDTO>, List<MoviePosterViewModel>>(_poster.GetRandomPosters());
+                return View(index);
+            }
+            catch(ArgumentException ex)
+            {
+                ModelState.AddModelError("Error", ex.Message);
+                return View();
+            }
+            return View();
         }
         public IActionResult Privacy()
         {

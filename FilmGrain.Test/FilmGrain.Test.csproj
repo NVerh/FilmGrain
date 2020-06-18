@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DAL\FilmGrain.DAL.csproj" />
+    <ProjectReference Include="..\Services\Services.csproj" />
   </ItemGroup>
 
 </Project>

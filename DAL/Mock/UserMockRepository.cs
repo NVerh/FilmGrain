@@ -36,11 +36,6 @@ namespace FilmGrain.DAL.Mock
             return false;
         }
 
-        public UserDTO GetAccount(string username, string password)
-        {
-            throw new NotImplementedException();
-        }
-
         public UserDTO GetAccountByEmail(string email)
         {
             var user = users.Single(em => em.Email == email);
@@ -59,11 +54,6 @@ namespace FilmGrain.DAL.Mock
             return _username;
         }
 
-        public bool Login(UserDTO user)
-        {
-            throw new NotImplementedException();
-        }
-
         public UserDTO Read(int key)
         {
             var user = users.Single(x => x.Id == key);
@@ -72,7 +62,14 @@ namespace FilmGrain.DAL.Mock
 
         public bool Update(UserDTO obj)
         {
-            throw new NotImplementedException();
+            obj = (from p in users
+                   where p.Id == obj.Id
+                   select p).SingleOrDefault();
+            if(obj != null)
+            {
+                return true;
+            }
+            return false;
         }
          bool ICRUDDAL<UserDTO>.Create(UserDTO obj)
         {

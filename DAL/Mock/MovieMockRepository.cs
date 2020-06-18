@@ -32,29 +32,24 @@ namespace FilmGrain.DAL.Mock
 
         public bool Delete(MovieDTO obj)
         {
-            var movies = _movies.RemoveAll(x => x.Id == obj.Id);
-            if(movies == 1)
+            _movies.RemoveAt(obj.Id);
+            if (!_movies.Contains(obj) && obj.Id != 0)
             {
                 return true;
             }
             return false;
         }
 
-        public IEnumerable<MovieDTO> GetMovies(int Id)
-        {
-            var movies = _movies.Where(m => m.Title.Equals(Id));
-            return movies;
-        }
-
         public IEnumerable<MovieDTO> GetMovies(string searchString)
         {
-            throw new NotImplementedException();
+            var movies = _movies.Where(m => m.Title.Contains(searchString));
+            return movies;
         }
 
         public IEnumerable<MovieDTO> GetRandomMovies()
         {
             Random r = new Random();
-            int toSkip = r.Next(0, _movies.Count);
+            int toSkip = r.Next(0);
             var movies = _movies.Skip(toSkip).Take(3);
             return movies;
         }
@@ -67,8 +62,10 @@ namespace FilmGrain.DAL.Mock
 
         public bool Update(MovieDTO obj)
         {
-            obj = _movies.Single(p => p.Id == obj.Id);
-            if(obj != null)
+            obj = (from p in _movies
+                   where p.Id == obj.Id
+                   select p).SingleOrDefault();
+            if (obj != null)
             {
                 return true;
             }

@@ -37,10 +37,6 @@ namespace FilmGrain.Logic
         {
             return _context.GetRandomMovies();
         }
-        public IEnumerable<MoviePosterDTO> GetRandomPosters()
-        {
-            return _context.GetRandomPosters();
-        }
 
         public bool Create(MovieDTO obj)
         {
