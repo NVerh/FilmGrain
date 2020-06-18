@@ -35,6 +35,10 @@ namespace FilmGrain.Controllers
         {
             return View();
         }
+        public IActionResult Login()
+        {
+            return View();
+        }
         [HttpPost]
         public IActionResult Register(RegisterViewModel model)
         {
@@ -59,7 +63,7 @@ namespace FilmGrain.Controllers
                 if (user != null)
                 {
                     _loginRepo.SetLoginSession(user.UserName, user.Id);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Profile", user);
                 }
             }
             catch(ArgumentException exc)
@@ -80,6 +84,10 @@ namespace FilmGrain.Controllers
                 ModelState.AddModelError("Error", exc.Message);
                 return View();
             }
+        }
+        public IActionResult Profile()
+        {
+            return View();
         }
     }
 }

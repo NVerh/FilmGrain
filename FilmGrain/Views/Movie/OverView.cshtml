@@ -13,7 +13,8 @@
 	</div>
 
 		<img src="@Model.PosterUrl" class="rounded float-left" />
-	<input type="button" value="Add to Favorites" class="btn btn-primary" asp-action="AddFavorite" asp-controller="Profile" asp-route-id="@Model.Id" />
+	<input type="button" value="Add to Favorites" class="btn btn-primary" onclick="toggleText()" />
+	<p id='favText' style='display: none'>Added to favorites!</p>
 </body>
 
 

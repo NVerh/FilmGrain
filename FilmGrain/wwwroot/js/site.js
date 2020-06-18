@@ -5,13 +5,21 @@ function GetMovie() {
 
 	$.ajax({
 		url: 'https://api.themoviedb.org/3/search/movie?api_key=' + api_key + '&query=' + searchinput,
-		type: "POST",
-		url: '/ResultController/Index'	
 		dataType: 'jsonp',
 		jsonpCallback: 'testing',
-		success: function (data) {
-			alert(jsonpCallback[0])
-			console.log(data);
+	}).error(function () {
+		console.log('error')
+	}).done(function (response) {
+		for (var i = 0; i < response.results.length; i++) {
+			$('#search_results').append('<li>' + response.results[i].title + '</i>');
 		}
 	})
-};
+}
+function toggleText() {
+	var text = document.getElementById("favText");
+	if (text.style.display === "none") {
+		text.style.display = "block";
+	} else {
+		text.style.display = "none";
+	}
+}

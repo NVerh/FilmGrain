@@ -43,7 +43,6 @@ namespace FilmGrain.Controllers
                 ModelState.AddModelError("Error", ex.Message);
                 return View();
             }
-            return View();
         }
         public IActionResult Privacy()
         {
