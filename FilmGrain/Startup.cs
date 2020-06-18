@@ -51,6 +51,8 @@ namespace FilmGrain
             services.AddScoped<IUserLogic, UserLogic>();
             services.AddScoped<IMovieDAL, MovieContext>();
             services.AddScoped<IMovieLogic, MovieLogic>();
+            services.AddScoped<IPosterLogic, PosterLogic>();
+            services.AddScoped<IPosterDAL, PosterContext>();
             services.AddScoped<LoginRepository>();
             services.AddAutoMapper(typeof(MappingBootstrapper));
             DBAccess._connectionstring = (Configuration.GetConnectionString("DefaultConnection"));            

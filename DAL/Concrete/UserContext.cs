@@ -116,6 +116,8 @@ namespace DAL.Concrete
                 string usernamefromdb = null;
                 using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
                 {
+                try
+                {
                     using (SqlCommand cmd = new SqlCommand("dbo.spUser_GetUsername", conn))
                     {
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -136,10 +138,18 @@ namespace DAL.Concrete
                         return usernamefromdb;
                     }
                 }
+                catch(SqlException exv)
+                {
+                    Console.WriteLine(exv);
+                    throw new ArgumentException("Database error: Cannot receive account name");
+                }
+                }
             }
-            public void Create(UserDTO obj)
+        public bool Create(UserDTO obj)
+        {
+            using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
             {
-                using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
+                try
                 {
                     conn.Open();
                     using (SqlCommand cmd = new SqlCommand("dbo.spAccount_Create", conn))
@@ -152,14 +162,23 @@ namespace DAL.Concrete
                         cmd.ExecuteNonQuery();
 
                     }
-                    conn.Close();
+                    conn.Dispose();
+                    return true;
+                }
+                catch(SqlException ex)
+                {
+                    Console.WriteLine(ex);
+                    throw new ArgumentException("Database error; cannot create User");
                 }
             }
+        }
 
             public UserDTO Read(int key)
             {
                 UserDTO user = new UserDTO();
                 using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
+                {
+                try
                 {
                     conn.Open();
                     using (SqlCommand cmd = new SqlCommand("dbo.spAccount_Read", conn))
@@ -186,14 +205,23 @@ namespace DAL.Concrete
                             }
                         }
                         conn.Close();
+
                     }
+                }
+                catch(SqlException ex)
+                {
+                    Console.WriteLine(ex);
+                    throw new ArgumentException("Database error; cannot read User");
+                }
                 }
                 return user;
             }
 
-            public void Update(UserDTO obj)
+            public bool Update(UserDTO obj)
             {
                 using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
+                {
+                try
                 {
                     conn.Open();
                     using (SqlCommand cmd = new SqlCommand("dbo.spAccount_Update", conn))
@@ -201,14 +229,23 @@ namespace DAL.Concrete
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@Username", obj.UserName);
                         cmd.ExecuteNonQuery();
-                        conn.Close();
+                        conn.Dispose();
+                        return true;
                     }
                 }
+                catch(SqlException ex)
+                {
+                    Console.WriteLine(ex);
+                    throw new ArgumentException("Database error; cannot update User");
+                }
+               }
             }
 
-            public void Delete(UserDTO obj)
+            public bool Delete(UserDTO obj)
             {
                 using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
+                {
+                try
                 {
                     conn.Open();
                     using (SqlCommand cmd = new SqlCommand("dbo.spAccount_Delete", conn))
@@ -218,6 +255,13 @@ namespace DAL.Concrete
                         cmd.ExecuteNonQuery();
                     }
                     conn.Close();
+                    return true;
+                }
+                catch(SqlException ex)
+                {
+                    Console.WriteLine(ex);
+                    throw new ArgumentException("Database error; cannot delete User");
+                }
                 }
             }
         }

@@ -1,11 +1,10 @@
-﻿using Xunit;
+﻿using Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Services;
-using System.Security.Policy;
+using Xunit;
 
-namespace FilmGrain.Tests.Services
+namespace FilmGrain.Test.Services
 {
     public class PasswordHashTests
     {
@@ -65,7 +64,6 @@ namespace FilmGrain.Tests.Services
 
             //Assert
             Assert.True(hash1 != hash2);
-           
         }
     }
 }

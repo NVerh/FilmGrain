@@ -9,6 +9,5 @@ namespace FilmGrain.Interfaces.DAL
     {
         public IEnumerable<MovieDTO> GetMovies(string searchString);
         public IEnumerable<MovieDTO> GetRandomMovies();
-        public IEnumerable<MoviePosterDTO> GetRandomPosters();
     }
 }

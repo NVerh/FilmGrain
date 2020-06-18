@@ -44,16 +44,11 @@ namespace FilmGrain.Controllers
                 ViewData["Message"] = "Account Created!";
                 return RedirectToAction("Login");
             }
-            catch(ApplicationException ex)
+            catch(ArgumentException exc)
             {
-                return RedirectToAction("Register", "Error", ex);
+                ModelState.AddModelError("Error", exc.Message);
+                return View();
             }
-        }
-        [HttpGet]
-        public IActionResult Login(string returnUrl = "")
-        {
-            var model = new LoginViewModel { ReturnUrl = returnUrl };
-            return View(model);
         }
         [HttpPost]
         public IActionResult Login(LoginViewModel model)
@@ -67,16 +62,24 @@ namespace FilmGrain.Controllers
                     return RedirectToAction("Index", "Home");
                 }
             }
-            catch(ApplicationException ex)
+            catch(ArgumentException exc)
             {
-                return RedirectToAction("Login", "Error", ex);
+                ModelState.AddModelError("Error", exc.Message);
             }
             return View();
         }
         public IActionResult Logout()
         {
-            _loginRepo.RemoveLoginSession();
-            return RedirectToAction("Login");
+            try
+            {
+                _loginRepo.RemoveLoginSession();
+                return RedirectToAction("Login");
+            }
+            catch(ArgumentException exc)
+            {
+                ModelState.AddModelError("Error", exc.Message);
+                return View();
+            }
         }
     }
 }

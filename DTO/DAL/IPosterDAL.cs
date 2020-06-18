@@ -5,8 +5,8 @@ using System.Text;
 
 namespace FilmGrain.Interfaces.DAL
 {
-    public interface IReadRepository
+    public interface IPosterDAL
     {
-        IEnumerable<MovieDTO> GetMovies(int Id);
+        IEnumerable<MoviePosterDTO> GetRandomPosters();
     }
 }

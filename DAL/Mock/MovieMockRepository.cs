@@ -1,16 +1,17 @@
 ﻿using FilmGrain.DTO;
 using FilmGrain.Interfaces.DAL;
+using FilmGrain.Interfaces.Mock;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
-namespace Services
+namespace FilmGrain.DAL.Mock
 {
-    public class MockReadRepository : IMovieDAL, IReadRepository
+    public class MovieMockRepository : IMovieMock
     {
-        List<MovieDTO> _movies = new List<MovieDTO>
+        public List<MovieDTO> _movies = new List<MovieDTO>
         {
             new MovieDTO{ Id = 1, Title = "Avatar", Director = "James Cameron", DateReleased = new DateTime(2009, 12, 17), AverageRating = 4.2m},
             new MovieDTO{ Id = 2, Title = "Gone With The Wind", Director= "Victor Fleming", DateReleased = new DateTime(1949, 3, 3), AverageRating = 4.7m},
@@ -18,48 +19,39 @@ namespace Services
             new MovieDTO{ Id = 4, Title = "Bright", Director = "David Ayer", DateReleased = new DateTime(2017,12,13), AverageRating = 3.2m},
             new MovieDTO{ Id = 5, Title = "Tremors", Director ="Ron Underwood", DateReleased = new DateTime(1990,9,8), AverageRating = 3.9m},
         };
-        List<MoviePosterDTO> _posters = new List<MoviePosterDTO>
-        {
-            new MoviePosterDTO{ Id = 1, Title ="Gone With The Wind", PosterURL ="https://theposterdb.com/api/assets/43275"},
-            new MoviePosterDTO{ Id = 2, Title ="The Invisible Man", PosterURL ="https://theposterdb.com/api/assets/17829"},
-            new MoviePosterDTO{ Id = 3, Title ="Bright", PosterURL="https://theposterdb.com/api/assets/75203"}
-        };
 
-        public void Create(MovieDTO obj)
+        public bool Create(MovieDTO obj)
         {
             _movies.Add(obj);
+            if(_movies.Contains(obj))
+            {
+                return true;
+            }
+            return false;
         }
 
-        public void Delete(MovieDTO obj)
+        public bool Delete(MovieDTO obj)
         {
-            var movies = _movies.RemoveAll(x => x.Id == obj.Id);
-        }
-
-        public IEnumerable<MovieDTO> GetMovies(int Id)
-        {
-            var movies = _movies.Where(m => m.Title.Equals(Id));
-            return movies;
+            _movies.RemoveAt(obj.Id);
+            if (!_movies.Contains(obj) && obj.Id != 0)
+            {
+                return true;
+            }
+            return false;
         }
 
         public IEnumerable<MovieDTO> GetMovies(string searchString)
         {
-            throw new NotImplementedException();
+            var movies = _movies.Where(m => m.Title.Contains(searchString));
+            return movies;
         }
 
         public IEnumerable<MovieDTO> GetRandomMovies()
         {
             Random r = new Random();
-            int toSkip = r.Next(0, _movies.Count);
+            int toSkip = r.Next(0);
             var movies = _movies.Skip(toSkip).Take(3);
             return movies;
-        }
-
-        public IEnumerable<MoviePosterDTO> GetRandomPosters()
-        {
-            Random r = new Random();
-            int toSkip = r.Next(0, _movies.Count);
-            var posters = _posters.Skip(toSkip).Take(3);
-            return posters;
         }
 
         public MovieDTO Read(int key)
@@ -68,9 +60,16 @@ namespace Services
             return movie;
         }
 
-        public void Update(MovieDTO obj)
+        public bool Update(MovieDTO obj)
         {
-            throw new NotImplementedException();
+            obj = (from p in _movies
+                   where p.Id == obj.Id
+                   select p).SingleOrDefault();
+            if (obj != null)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

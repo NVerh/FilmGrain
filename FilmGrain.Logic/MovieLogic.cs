@@ -33,22 +33,14 @@ namespace FilmGrain.Logic
             }
             return filteredMovie;
         }
-        private double CalculateAverageRating(List<RatingDTO> ratings)
-        {
-            throw new NotImplementedException();
-        }
         public IEnumerable<MovieDTO> GetRandomMovies()
         {
             return _context.GetRandomMovies();
         }
-        public IEnumerable<MoviePosterDTO> GetRandomPosters()
-        {
-            return _context.GetRandomPosters();
-        }
 
-        public void Create(MovieDTO obj)
+        public bool Create(MovieDTO obj)
         {
-            _context.Create(obj);
+            return _context.Create(obj);
         }
 
         public MovieDTO Read(int key)
@@ -56,14 +48,14 @@ namespace FilmGrain.Logic
             return _context.Read(key);
         }
 
-        public void Update(MovieDTO obj)
+        public bool Update(MovieDTO obj)
         {
-            _context.Update(obj);
+            return _context.Update(obj);
         }
 
-        public void Delete(MovieDTO obj)
+        public bool Delete(MovieDTO obj)
         {
-            _context.Delete(obj);
+            return _context.Delete(obj);
         }
     }
 }

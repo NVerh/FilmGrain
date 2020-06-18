@@ -15,7 +15,7 @@ namespace FilmGrain.DAL.Concrete
 {
     public class MovieContext : IMovieDAL
     {
-        public void Create(MovieDTO obj)
+        public bool Create(MovieDTO obj)
         {
             using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
             {
@@ -35,6 +35,7 @@ namespace FilmGrain.DAL.Concrete
                         cmd.ExecuteNonQuery();
                     }
                     conn.Dispose();
+                    return true;
                 }
                 catch (SqlException exv)
                 {
@@ -44,7 +45,7 @@ namespace FilmGrain.DAL.Concrete
             }
         }
 
-        public void Delete(MovieDTO obj)
+        public bool Delete(MovieDTO obj)
         {
             using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
             {
@@ -58,6 +59,7 @@ namespace FilmGrain.DAL.Concrete
                         cmd.ExecuteNonQuery();
                     }
                     conn.Dispose();
+                    return true;
                 }
                 catch (SqlException ex)
                 {
@@ -163,49 +165,6 @@ namespace FilmGrain.DAL.Concrete
                 return movies;
             }
         }
-        public IEnumerable<MoviePosterDTO> GetRandomPosters()
-        {
-            List<MoviePosterDTO> moviePosters = new List<MoviePosterDTO>();
-            using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
-            {
-                try
-                {
-                    using (SqlCommand cmd = new SqlCommand("dbo.spMovie_GetRandomMoviePosters", conn))
-                    {
-                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                        conn.Open();
-                        using (SqlDataReader datareader = cmd.ExecuteReader())
-                        {
-                            while (datareader.Read())
-                            {
-                                int id = datareader.GetInt32(0);
-                                string title = datareader.GetString(1);
-                                string posterUrl = datareader.GetString(2);
-                                if (!datareader.IsDBNull(0))
-                                {
-                                    MoviePosterDTO poster = new MoviePosterDTO
-                                    {
-                                        Id = id,
-                                        Title = title,
-                                        PosterURL = posterUrl,
-
-                                    };
-                                    moviePosters.Add(poster);
-
-                                }
-                            }
-                        }
-                        conn.Dispose();
-                    }
-                }
-                catch (SqlException ex)
-                {
-                    Console.WriteLine(ex);
-                    throw new ArgumentException("Database error; cannot get random Posters");
-                }
-            }
-            return moviePosters;
-        }
 
         public MovieDTO Read(int key)
         {
@@ -255,7 +214,7 @@ namespace FilmGrain.DAL.Concrete
             }
         }
 
-            public void Update(MovieDTO obj)
+            public bool Update(MovieDTO obj)
             {
                 using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
                 {
@@ -268,6 +227,7 @@ namespace FilmGrain.DAL.Concrete
                             cmd.Parameters.AddWithValue("@Rating", obj.AverageRating);
                             cmd.ExecuteNonQuery();
                             conn.Dispose();
+                        return true;
                         }
                     }
                     catch (SqlException ex)
