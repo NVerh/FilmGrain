@@ -19,16 +19,14 @@ namespace FilmGrain.Controllers
     public class HomeController : Controller
     {
         private readonly IMovieLogic _movie;
-        private readonly IAccountLogic _account;
         private readonly IMapper _mapper;
         private readonly LoginRepository _login;
 
-        public HomeController(IMovieLogic movie, IMapper mapper, LoginRepository login, IAccountLogic account)
+        public HomeController(IMovieLogic movie, IMapper mapper, LoginRepository login)
         {
             _movie = movie;
             _mapper = mapper;
             _login = login;
-            _account = account;
         }
 
         public IActionResult Index(IndexViewModel index, AccountViewModel account)
