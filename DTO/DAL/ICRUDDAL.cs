@@ -6,9 +6,9 @@ namespace FilmGrain.Interfaces.DAL
 {
     public interface ICRUDDAL<T>
     {
-        bool Create(T obj);
-        T Read(int key);
-        bool Update(T obj);
-        bool Delete(T obj);
+        public bool Create(T obj);
+        public T Read(int key);
+        public bool Update(T obj);
+        public bool Delete(T obj);
     }
 }

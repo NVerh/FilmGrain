@@ -11,11 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmGrain.DAL", "DAL\FilmGr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{916059E7-79C4-4EFD-9A16-6B5D314E0324}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmGrain.Tests", "FilmGrain.Tests\FilmGrain.Tests.csproj", "{CFD68320-994D-4824-ACFF-1B0CF795D45A}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmGrain.Logic", "FilmGrain.Logic\FilmGrain.Logic.csproj", "{4417AA36-0F88-413B-89A2-90182D5D3BA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilmGrain.DTO", "FilmGrain.DTO\FilmGrain.DTO.csproj", "{31AF6C5D-61CD-46A2-912C-5D51A259DB00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmGrain.DTO", "FilmGrain.DTO\FilmGrain.DTO.csproj", "{31AF6C5D-61CD-46A2-912C-5D51A259DB00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilmGrain.Test", "FilmGrain.Test\FilmGrain.Test.csproj", "{318E123D-D3C2-43BD-8E1B-B8DB7351067D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,10 +39,6 @@ Global
 		{916059E7-79C4-4EFD-9A16-6B5D314E0324}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{916059E7-79C4-4EFD-9A16-6B5D314E0324}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{916059E7-79C4-4EFD-9A16-6B5D314E0324}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CFD68320-994D-4824-ACFF-1B0CF795D45A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CFD68320-994D-4824-ACFF-1B0CF795D45A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CFD68320-994D-4824-ACFF-1B0CF795D45A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CFD68320-994D-4824-ACFF-1B0CF795D45A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4417AA36-0F88-413B-89A2-90182D5D3BA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4417AA36-0F88-413B-89A2-90182D5D3BA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4417AA36-0F88-413B-89A2-90182D5D3BA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -51,6 +47,10 @@ Global
 		{31AF6C5D-61CD-46A2-912C-5D51A259DB00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31AF6C5D-61CD-46A2-912C-5D51A259DB00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31AF6C5D-61CD-46A2-912C-5D51A259DB00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{318E123D-D3C2-43BD-8E1B-B8DB7351067D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{318E123D-D3C2-43BD-8E1B-B8DB7351067D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{318E123D-D3C2-43BD-8E1B-B8DB7351067D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{318E123D-D3C2-43BD-8E1B-B8DB7351067D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

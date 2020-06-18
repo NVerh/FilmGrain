@@ -1,5 +1,6 @@
 ﻿using FilmGrain.DTO;
 using FilmGrain.Interfaces.DAL;
+using FilmGrain.Interfaces.Mock;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -7,15 +8,18 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
-namespace Services
+namespace FilmGrain.DAL.Mock
 {
-    public class UserMockRepository : IUserDAL
+    public class UserMockRepository : IUserMock
     {
-        List<UserDTO> users = new List<UserDTO>
+        public static List<UserDTO> users = new List<UserDTO>
         {
-            new UserDTO { Id = 5, Email = "HenkSluipers@gmail.com", IsAdmin = false, UserName = "HenkS", Password = PasswordHash.Create("HenkisCool123",PasswordSalt.Create())},
-            new UserDTO { Id = 7, Email = "TomTrapper@gmail.com", IsAdmin = false, UserName = "TomT", Password= PasswordHash.Create("TomTRock321", PasswordSalt.Create())},
-            new UserDTO { Id = 9, Email = "NinoVerlopen@hotmail.com", IsAdmin = false, UserName = "NinoV", Password = PasswordHash.Create("NVer2321", PasswordSalt.Create())}
+            new UserDTO { Id = 1, Email = "Hs@gmail.com", IsAdmin = false, UserName = "HS", Password = "HS2"},
+            new UserDTO { Id = 2, Email = "To@gmail.com", IsAdmin = false, UserName = "T", Password= "Tomk321"},
+            new UserDTO { Id = 3, Email = "Ni@hotmail.com", IsAdmin = false, UserName = "N", Password = "NV1" },
+            new UserDTO { Id = 4, Email = "HenkSluipers@gmail.com", IsAdmin = false, UserName = "HenkS", Password ="HenkisCool123"},
+            new UserDTO { Id = 5, Email = "TomTrapper@gmail.com", IsAdmin = false, UserName = "TomT", Password= "Test123"},
+            new UserDTO { Id = 6, Email = "NinoVerlopen@hotmail.com", IsAdmin = false, UserName = "NinoV", Password = "NVer2321"}
         };
         public void AddAccountToDB(UserDTO user)
         {
@@ -25,11 +29,16 @@ namespace Services
         public bool Delete(UserDTO obj)
         {
             users.RemoveAt(obj.Id);
-            if(!users.Contains(obj))
+            if(!users.Contains(obj) && obj.Id != 0)
             {
                 return true;
             }
             return false;
+        }
+
+        public UserDTO GetAccount(string username, string password)
+        {
+            throw new NotImplementedException();
         }
 
         public UserDTO GetAccountByEmail(string email)
@@ -50,6 +59,11 @@ namespace Services
             return _username;
         }
 
+        public bool Login(UserDTO user)
+        {
+            throw new NotImplementedException();
+        }
+
         public UserDTO Read(int key)
         {
             var user = users.Single(x => x.Id == key);
@@ -60,11 +74,10 @@ namespace Services
         {
             throw new NotImplementedException();
         }
-
-        bool ICRUDDAL<UserDTO>.Create(UserDTO obj)
+         bool ICRUDDAL<UserDTO>.Create(UserDTO obj)
         {
             users.Add(obj);
-            if(users.Contains(obj))
+            if (users.Contains(obj))
             {
                 return true;
             }

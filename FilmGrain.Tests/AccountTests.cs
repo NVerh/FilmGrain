@@ -64,5 +64,11 @@ namespace FilmGrain.Tests
 
             Assert.False(result);
         }
+        [Theory]
+        [InlineData("HenkSluipers@gmail.com")]
+        public void GetAccountByEmail_Check_If_Email_Is_Valid(string email)
+        {
+
+        }
     }
 }
