@@ -52,17 +52,17 @@ namespace FilmGrain.Tests
         {
             UserDTO user = new UserDTO { Id = 3 };
 
-            _mock.Delete(user);
+           bool result = _mock.Delete(user);
 
-            Assert.Null(_mock.Read(3));
+            Assert.True(result);
         }
         [Fact]
         public void DeleteUser_Unsuccesful()
         {
             UserDTO user = new UserDTO { Id = 7 };
-            _mock.Delete(user);
+            bool result = _mock.Delete(user);
 
-            Assert.Null(user);
+            Assert.False(result);
         }
     }
 }

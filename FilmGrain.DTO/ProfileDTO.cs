@@ -8,9 +8,9 @@ namespace FilmGrain.DTO
     {
         public int Id { get; set; }
         public UserDTO User { get; set; }
-        public List<MovieDTO> WatchedMovies { get; set; }
-        public List<MovieDTO> FavoriteMovies { get; set; }
-        public List<ReviewDTO> Reviews { get; set; }
-        public List<RatingDTO> Ratings { get; set; }
+        public IEnumerable<MovieDTO> WatchedMovies { get; set; }
+        public IEnumerable<MovieDTO> FavoriteMovies { get; set; }
+        public IEnumerable<ReviewDTO> Reviews { get; set; }
+        public IEnumerable<RatingDTO> Ratings { get; set; }
     }
 }

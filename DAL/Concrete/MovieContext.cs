@@ -15,7 +15,7 @@ namespace FilmGrain.DAL.Concrete
 {
     public class MovieContext : IMovieDAL
     {
-        public void Create(MovieDTO obj)
+        public bool Create(MovieDTO obj)
         {
             using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
             {
@@ -35,6 +35,7 @@ namespace FilmGrain.DAL.Concrete
                         cmd.ExecuteNonQuery();
                     }
                     conn.Dispose();
+                    return true;
                 }
                 catch (SqlException exv)
                 {
@@ -44,7 +45,7 @@ namespace FilmGrain.DAL.Concrete
             }
         }
 
-        public void Delete(MovieDTO obj)
+        public bool Delete(MovieDTO obj)
         {
             using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
             {
@@ -58,6 +59,7 @@ namespace FilmGrain.DAL.Concrete
                         cmd.ExecuteNonQuery();
                     }
                     conn.Dispose();
+                    return true;
                 }
                 catch (SqlException ex)
                 {
@@ -255,7 +257,7 @@ namespace FilmGrain.DAL.Concrete
             }
         }
 
-            public void Update(MovieDTO obj)
+            public bool Update(MovieDTO obj)
             {
                 using (SqlConnection conn = new SqlConnection(DBAccess._connectionstring))
                 {
@@ -268,6 +270,7 @@ namespace FilmGrain.DAL.Concrete
                             cmd.Parameters.AddWithValue("@Rating", obj.AverageRating);
                             cmd.ExecuteNonQuery();
                             conn.Dispose();
+                        return true;
                         }
                     }
                     catch (SqlException ex)

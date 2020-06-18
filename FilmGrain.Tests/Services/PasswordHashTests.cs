@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,10 +7,9 @@ using System.Security.Policy;
 
 namespace FilmGrain.Tests.Services
 {
-    [TestClass]
     public class PasswordHashTests
     {
-        [TestMethod]
+        [Fact]
         public void Hash_Validate_Match_Text()
         {
             // Arrange
@@ -22,9 +21,9 @@ namespace FilmGrain.Tests.Services
             var match = PasswordHash.Validate(message, salt, hash);
 
             // Assert
-            Assert.IsTrue(match);
+            Assert.True(match);
         }
-        [TestMethod]
+        [Fact]
         public void Fake_Hash_Valides_Does_Not_Match_Text()
         {
             // Arrange
@@ -35,9 +34,9 @@ namespace FilmGrain.Tests.Services
             // Act
             var match = PasswordHash.Validate(message, salt, hash);
 
-            Assert.IsFalse(match);
+            Assert.False(match);
         }
-        [TestMethod]
+        [Fact]
         public void Two_Same_Message_Have_Different_Salt()
         {
             var message1 = "password12";
@@ -50,9 +49,9 @@ namespace FilmGrain.Tests.Services
             var hash2 = PasswordHash.Create(message2, salt2);
 
             //Assert
-            Assert.IsTrue(hash1 != hash2);
+            Assert.True(hash1 != hash2);
         }
-        [TestMethod]
+        [Fact]
         public void Two_Different_Messages_Dont_Match()
         {
             // Arrange
@@ -65,7 +64,7 @@ namespace FilmGrain.Tests.Services
             var hash2 = PasswordHash.Create(message2, salt);
 
             //Assert
-            Assert.IsTrue(hash1 != hash2);
+            Assert.True(hash1 != hash2);
            
         }
     }

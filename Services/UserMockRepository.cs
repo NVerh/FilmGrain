@@ -22,9 +22,14 @@ namespace Services
             users.Add(user);
         }
 
-        public void Delete(UserDTO obj)
+        public bool Delete(UserDTO obj)
         {
             users.RemoveAt(obj.Id);
+            if(!users.Contains(obj))
+            {
+                return true;
+            }
+            return false;
         }
 
         public UserDTO GetAccountByEmail(string email)
@@ -51,14 +56,19 @@ namespace Services
             return user;
         }
 
-        public void Update(UserDTO obj)
+        public bool Update(UserDTO obj)
         {
             throw new NotImplementedException();
         }
 
-        void ICRUDDAL<UserDTO>.Create(UserDTO obj)
+        bool ICRUDDAL<UserDTO>.Create(UserDTO obj)
         {
             users.Add(obj);
+            if(users.Contains(obj))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

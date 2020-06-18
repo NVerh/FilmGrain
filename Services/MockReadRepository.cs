@@ -25,14 +25,24 @@ namespace Services
             new MoviePosterDTO{ Id = 3, Title ="Bright", PosterURL="https://theposterdb.com/api/assets/75203"}
         };
 
-        public void Create(MovieDTO obj)
+        public bool Create(MovieDTO obj)
         {
             _movies.Add(obj);
+            if(_movies.Contains(obj))
+            {
+                return true;
+            }
+            return false;
         }
 
-        public void Delete(MovieDTO obj)
+        public bool Delete(MovieDTO obj)
         {
             var movies = _movies.RemoveAll(x => x.Id == obj.Id);
+            if(movies == 1)
+            {
+                return true;
+            }
+            return false;
         }
 
         public IEnumerable<MovieDTO> GetMovies(int Id)
@@ -68,9 +78,14 @@ namespace Services
             return movie;
         }
 
-        public void Update(MovieDTO obj)
+        public bool Update(MovieDTO obj)
         {
-            throw new NotImplementedException();
+            obj = _movies.Single(p => p.Id == obj.Id);
+            if(obj != null)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

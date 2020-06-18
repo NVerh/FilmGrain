@@ -22,9 +22,9 @@ namespace FilmGrain.Logic
             _userContext.AddAccountToDB(user);
         }
 
-        public void Create(UserDTO obj)
+        public bool Create(UserDTO obj)
         {
-            _userContext.Create(obj);
+            return _userContext.Create(obj);
         }
 
         public void CreateAccount(UserDTO user)
@@ -33,9 +33,9 @@ namespace FilmGrain.Logic
             _userContext.AddAccountToDB(user);
         }
 
-        public void Delete(UserDTO obj)
+        public bool Delete(UserDTO obj)
         {
-            _userContext.Delete(obj);
+            return _userContext.Delete(obj);
         }
 
         public UserDTO GetAccount(string username, string password)
@@ -67,9 +67,9 @@ namespace FilmGrain.Logic
             return _userContext.Read(key);
         }
 
-        public void Update(UserDTO obj)
+        public bool Update(UserDTO obj)
         {
-            _userContext.Update(obj);
+           return _userContext.Update(obj);
         }
         public bool VerifyByEmail(string email)
         {
