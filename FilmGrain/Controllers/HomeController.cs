@@ -20,14 +20,12 @@ namespace FilmGrain.Controllers
     {
         private readonly IMovieLogic _movie;
         private readonly IMapper _mapper;
-        private readonly LoginRepository _login;
         private readonly IPosterLogic _poster;
 
-        public HomeController(IMovieLogic movie, IMapper mapper, LoginRepository login, IPosterLogic poster)
+        public HomeController(IMovieLogic movie, IMapper mapper, IPosterLogic poster)
         {
             _movie = movie;
             _mapper = mapper;
-            _login = login;
             _poster = poster;
         }
 
@@ -40,8 +38,8 @@ namespace FilmGrain.Controllers
             }
             catch(ArgumentException ex)
             {
-                ModelState.AddModelError("Error", ex.Message);
-                return View();
+                TempData["ErrorMessage"] = ex.Message;
+                return RedirectToAction("Index", "Error");
             }
         }
         public IActionResult Privacy()
@@ -59,15 +57,32 @@ namespace FilmGrain.Controllers
         {
             if(!ModelState.IsValid)
             {
-                var Films =_movie.GetMovies(searchText);
+                try
+                {
+
+                    var Films = _movie.GetMovies(searchText);
+                }
+                catch(ArgumentException ex)
+                {
+                    TempData["ErrorMessage"] = ex.Message;
+                    return RedirectToAction("Index", "Error");
+                }
             }
             return View();
         }
         public IActionResult GoToOverview(int id)
         {
-            MovieViewModel movie = new MovieViewModel();
-            movie = _mapper.Map<MovieViewModel>(_movie.Read(id));
-            return RedirectToAction("Overview", "Movie", movie);
+            try
+            {
+                MovieViewModel movie = new MovieViewModel();
+                movie = _mapper.Map<MovieViewModel>(_movie.Read(id));
+                return RedirectToAction("Overview", "Movie", movie);
+            }
+            catch(ArgumentException ex)
+            {
+                TempData["ErrorMessage"] = ex.Message;
+                return RedirectToAction("Index", "Error");
+            }
         }
     }
 }

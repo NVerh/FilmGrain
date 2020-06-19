@@ -15,10 +15,14 @@ namespace FilmGrain.Controllers
     [AllowAnonymous]
     public class ErrorController : Controller
     {
-        public IActionResult Error(ApplicationException ex)
+        public IActionResult Error(ArgumentException ex)
         {
-            ViewBag["Error"] = ex;
             return View(ex);
+        }
+        public IActionResult Index()
+        {
+            ViewBag.MyString = TempData["ErrorMessage"];
+            return View();
         }
     }
 }

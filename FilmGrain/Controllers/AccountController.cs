@@ -50,8 +50,8 @@ namespace FilmGrain.Controllers
             }
             catch(ArgumentException exc)
             {
-                ModelState.AddModelError("Error", exc.Message);
-                return View();
+                TempData["ErrorMessage"] = exc.Message;
+                return RedirectToAction("Index", "Error");
             }
         }
         [HttpPost]
@@ -68,7 +68,8 @@ namespace FilmGrain.Controllers
             }
             catch(ArgumentException exc)
             {
-                ModelState.AddModelError("Error", exc.Message);
+                TempData["ErrorMessage"] = exc.Message;
+                return RedirectToAction("Index", "Error");
             }
             return View();
         }
@@ -81,8 +82,8 @@ namespace FilmGrain.Controllers
             }
             catch(ArgumentException exc)
             {
-                ModelState.AddModelError("Error", exc.Message);
-                return View();
+                TempData["ErrorMessage"] = exc.Message;
+                return RedirectToAction("Index", "Error");
             }
         }
         public IActionResult Profile()
